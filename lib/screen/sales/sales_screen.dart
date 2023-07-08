@@ -28,6 +28,9 @@ class _SalesScreenState extends State<SalesScreen> {
             },
             text: 'Sales',
           ),
+          SizedBox(
+            height: 10.0,
+          ),
           Flexible(
             child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.94,
@@ -37,45 +40,59 @@ class _SalesScreenState extends State<SalesScreen> {
                   final company = companies[index];
                   return ClipRRect(
                     // borderRadius: BorderRadius.circular(50),
-                    child: Card(
-                      elevation: 3,
-                      margin: EdgeInsets.only(
-                          top: 10, bottom: 10, left: 1, right: 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.all(10),
-                        leading: Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 8,
-                                offset: Offset(0, 4),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 15.0),
+                      child: Container(
+                        width: 327,
+                        height: 97,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(38),
+                          ),
+                          // shadows: [
+                          //   BoxShadow(
+                          //     color: Color(0x21000000),
+                          //     blurRadius: 28,
+                          //     offset: Offset(2, 2),
+                          //     spreadRadius: 1,
+                          //   )
+                          // ],
+                        ),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.only(
+                              top: 20, left: 15.0, right: 15.0, bottom: 20.0),
+                          leading: SizedBox(
+                            width: 60,
+                            height: 80,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                // constraints: const BoxConstraints(
+                                //   maxWidth: 300,
+                                //   maxHeight: 20,
+                                // ),
+                                color: Colors.green,
+                                child: Image.asset(company.imageUrl,fit: BoxFit.fill,),
                               ),
-                            ],
+                            ),
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(company.imageUrl),
+                          title: Text(
+                            company.name,
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600),
                           ),
+                          trailing: Icon(
+                            Icons.arrow_circle_right_outlined,
+                            size: 30,
+                          ),
+                          onTap: () {
+                            Get.to(() => CompanySalesScreen(
+                                  company: company,
+                                ));
+                          },
                         ),
-                        title: Text(
-                          company.name,
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w600),
-                        ),
-                        trailing: Icon(
-                          Icons.arrow_circle_right_outlined,
-                          size: 30,
-                        ),
-                        onTap: () {
-                          Get.to(() => CompanySalesScreen(company: company,));
-                        },
                       ),
                     ),
                   );

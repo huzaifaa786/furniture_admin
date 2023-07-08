@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:furniture_admin/helper/loading.dart';
 import 'package:furniture_admin/screen/auth/login_screen.dart';
-import 'package:furniture_admin/screen/company/add_company_screen.dart';
 import 'package:furniture_admin/screen/sales/salecontroller.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/screen/splash_screen/splash_screen.dart';
@@ -45,7 +44,6 @@ class _MyAppState extends State<MyApp> {
       routes: {
         'splash': (_) => const SplashScreen(),
         'login': (_) => const LoginScreen(),
-        'addcompany': (_) => const AddCompanyScreen(),
         'companysale': (_) => const SalesScreen(),
       },
     );

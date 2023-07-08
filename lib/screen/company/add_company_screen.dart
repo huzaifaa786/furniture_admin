@@ -14,51 +14,105 @@ class _MyWidgetState extends State<AddCompanyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Container(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TopBar(
-              text: ' Add Company',
-              ontap: () {},
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 104,
-              decoration: ShapeDecoration(
-                color: Color(0x11823E13),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1, color: Color(0xFF823E14)),
-                  borderRadius: BorderRadius.circular(15),
-                ),
+          child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(top: 10, right: 10, left: 10),
+          child: Column(
+            children: [
+              TopBar(
+                text: ' Add Company',
+                ontap: () {},
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Image(
-                        image: AssetImage('assets/images/addcompanyy.png')),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 104,
+                decoration: ShapeDecoration(
+                  color: Color(0x11823E13),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 1, color: Color(0xFF823E14)),
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  Text(
-                    'Upload Photo',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  )
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Bio in english',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
-              ],
-            ),
-            BioInputField(),
-            
-          ],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Image(
+                          image: AssetImage('assets/images/addcompanyy.png')),
+                    ),
+                    Text(
+                      'Upload Photo',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Bio in english',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+              BioInputField(),
+              Padding(
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Bio in arabic',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+              BioInputField(),
+               Padding(
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Working Hours',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
+                      Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  scrollPadding: EdgeInsets.only(bottom: 30),
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    suffixIcon: Icon(
+                      Icons.add_circle_outline,
+                      color: Colors.grey,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[300]!),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[300]!),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    hintText: 'Your message',
+                  ),
+                ),
+              ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       )),
     );

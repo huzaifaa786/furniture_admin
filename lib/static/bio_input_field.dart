@@ -45,6 +45,7 @@ class BioInputField extends StatelessWidget {
     // bool isDark = Provider.of<DarkThemeProvider>(context).darkTheme;
 
     return TextFormField(
+      
       readOnly: readOnly,
       enabled: enabled,
       controller: controller,
@@ -85,7 +86,7 @@ class BioInputField extends StatelessWidget {
                     ),
       ),
       cursorColor: Colors.black,
-      maxLines: maxlines == true ? null : 1,
+      maxLines: maxlines == true ? null : 3,
     );
   }
 }

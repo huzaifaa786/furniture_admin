@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_admin/screen/bugs/bugs.dart';
+import 'package:furniture_admin/screen/company/add_company_screen.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/static/main_card.dart';
 import 'package:furniture_admin/values/colors.dart';
@@ -142,7 +143,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         MainCard(
                           image: 'assets/images/addCompany.svg',
                           title: 'Add Comapny',
-                          ontap: () {},
+                          ontap: () {
+                             Get.to(() => AddCompanyScreen());
+                          },
                         ),
                         MainCard(
                           image: 'assets/images/sales.svg',

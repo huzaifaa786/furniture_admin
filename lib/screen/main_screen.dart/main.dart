@@ -10,6 +10,8 @@ import 'package:furniture_admin/static/main_card.dart';
 import 'package:furniture_admin/values/colors.dart';
 import 'package:get/get.dart';
 
+import '../orders/orderscreen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -157,7 +159,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         MainCard(
                           image: 'assets/images/document.svg',
                           title: 'Orders',
-                          ontap: () {},
+                          ontap: () {
+                            Get.to(()=> OrderScreen());
+                          },
                         ),
                         MainCard(
                           image: 'assets/images/chat1.svg',

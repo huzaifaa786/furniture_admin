@@ -7,11 +7,11 @@ class Company {
 }
 
 List<Company> companies = [
-  Company(name: "Company 1", imageUrl: "assets/images/splashLogo.png"),
-  Company(name: "Company 2", imageUrl: "assets/images/splashLogo.png"),
-  Company(name: "Company 1", imageUrl: "assets/images/splashLogo.png"),
-  Company(name: "Company 2", imageUrl: "assets/images/splashLogo.png"),
-  Company(name: "Company 1", imageUrl: "assets/images/splashLogo.png"),
-  Company(name: "Company 2", imageUrl: "assets/images/splashLogo.png"),
+  Company(name: "Company 1", imageUrl: "assets/images/company/company1.jpg"),
+  Company(name: "Company 2", imageUrl: "assets/images/company/comapny.jpg"),
+  Company(name: "Company 1", imageUrl: "assets/images/company/comapny.jpg"),
+  Company(name: "Company 2", imageUrl: "assets/images/company/comapny.jpg"),
+  Company(name: "Company 1", imageUrl: "assets/images/company/comapny.jpg"),
+  Company(name: "Company 2", imageUrl: "assets/images/company/comapny.jpg"),
   // Add more company instances as needed
 ];

@@ -10,7 +10,7 @@ import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/static/main_card.dart';
 import 'package:furniture_admin/values/colors.dart';
 import 'package:get/get.dart';
-
+import '../chat/chat_view.dart';
 import '../orders/orderscreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -169,7 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         MainCard(
                           image: 'assets/images/chat1.svg',
                           title: 'All Chats',
-                          ontap: () {},
+                          ontap: () {
+                             Get.to(() => ChatViewScreen());
+                          },
                         ),
                       ],
                     ),

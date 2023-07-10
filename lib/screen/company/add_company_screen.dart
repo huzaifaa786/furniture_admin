@@ -77,41 +77,8 @@ class _MyWidgetState extends State<AddCompanyScreen> {
                 ),
               ),
               BioInputField(),
-               Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Working Hours',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                    ),
-                      Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  scrollPadding: EdgeInsets.only(bottom: 30),
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.add_circle_outline,
-                      color: Colors.grey,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[300]!),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[300]!),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    hintText: 'Your message',
-                  ),
-                ),
-              ),
-                  ],
-                ),
-              ),
-            ],
+             
+          ],
           ),
         ),
       )),

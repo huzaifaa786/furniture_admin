@@ -65,14 +65,6 @@ class _MyWidgetState extends State<OrderStatusScreen> {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                   ),
-                  // OrderStatusTile(title: 'Company Name', discription: 'XYZ'),
-                  // OrderStatusTile(
-                  //     title: 'Date of Service', discription: '03/03/23'),
-                  // OrderStatusTile(
-                  //     title: 'Time of Service', discription: '09:00'),
-                  // OrderStatusTile(
-                  //     title: 'Order Details', discription: '1 Table \n 3 Chairs'),
-                 
                   Padding(
                     padding: EdgeInsets.only(top: 25),
                     child: Row(

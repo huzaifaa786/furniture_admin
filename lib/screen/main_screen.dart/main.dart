@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_admin/screen/bugs/bugs.dart';
 import 'package:furniture_admin/screen/company/add_company_screen.dart';
+import 'package:furniture_admin/screen/company/edit_company_screen.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/static/main_card.dart';
 import 'package:furniture_admin/values/colors.dart';
@@ -23,10 +24,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int current = 0;
   List<String> imgList = [
-    'https://cdn.shopify.com/s/files/1/0891/4784/articles/Top_12_Furniture_Store_in_Calgary_1024x1024.jpg?v=1663218020',
-    'https://cdn.shopify.com/s/files/1/0891/4784/articles/Top_12_Furniture_Store_in_Calgary_1024x1024.jpg?v=1663218020',
-    'https://cdn.shopify.com/s/files/1/0891/4784/articles/Top_12_Furniture_Store_in_Calgary_1024x1024.jpg?v=1663218020',
-  ];
+     ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'assets/images/addCompany.svg',
                           title: 'Add Comapny',
                           ontap: () {
-                             Get.to(() => AddCompanyScreen());
+                             Get.offAll(() => AddCompanyScreen());
                           },
                         ),
                         MainCard(
@@ -157,7 +155,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         MainCard(
                           image: 'assets/images/edit.svg',
                           title: 'Edit Comapny',
-                          ontap: () {},
+                          ontap: () {
+                            Get.to(()=> EditCompanyScreen());
+
+                          },
                         ),
                         MainCard(
                           image: 'assets/images/document.svg',

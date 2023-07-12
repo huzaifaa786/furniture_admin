@@ -1,24 +1,25 @@
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:furniture_admin/helper/loading.dart';
+import 'package:furniture_admin/screen/auth/login_controller.dart';
 import 'package:furniture_admin/screen/auth/login_screen.dart';
-import 'package:furniture_admin/screen/sales/salecontroller.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/screen/splash_screen/splash_screen.dart';
+import 'package:furniture_admin/services/auth_service.dart';
 import 'package:furniture_admin/values/styles.dart';
 import 'package:get/get.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LoadingHelper.init();
-  // Get.put(LoginController());
-
-  // Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-  //     .then((value) {
-    Get.put(SaleController());
-  //   Get.put(SignUpController());
-  //   Get.put(LoginController());
-  // });
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) {
+    Get.put(AuthService());
+    Get.put(LoginController());
+  });
   runApp(const MyApp());
 }
 

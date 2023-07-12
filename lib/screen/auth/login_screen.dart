@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:furniture_admin/screen/main_screen.dart/main.dart';
+import 'package:furniture_admin/constants/constants.dart';
 import 'package:furniture_admin/static/input_field1.dart';
 import 'package:furniture_admin/static/large_button.dart';
 import 'package:furniture_admin/values/Validator.dart';
 import 'package:furniture_admin/values/colors.dart';
-import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -91,10 +90,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: InputField1(
                                       icon: 'assets/images/email.svg',
                                       hint: 'Email Address',
-                                      // controller: loginController.email,
+                                      controller: loginController.email,
                                       type: TextInputType.emailAddress,
-                                      // validate: loginController
-                                      // .validateSignInForm,
+                                      validate: loginController
+                                      .validateSignInForm,
                                       validator: (field) =>
                                           Validators.emailValidator(field),
                                     ),
@@ -103,9 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     icon: 'assets/images/lock.svg',
                                     hint: 'Password',
                                     obscure: true,
-                                    // controller: loginController.password,
-                                    // validate:
-                                    //     loginController.validateSignInForm,
+                                    controller: loginController.password,
+                                    validate:
+                                        loginController.validateSignInForm,
                                     validator: (field) =>
                                         Validators.emptyStringValidator(
                                             field, '*password'),
@@ -133,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     title: 'Login',
                                     sreenRatio: 0.9,
                                     onPressed: () {
-                                      Get.to(() => HomeScreen());
+                                       loginController.loginUser();
                                     },
                                     textcolor: Colors.white,
                                     buttonWidth: 0.95,

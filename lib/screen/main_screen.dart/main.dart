@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:furniture_admin/constants/constants.dart';
 import 'package:furniture_admin/screen/bugs/bugs.dart';
 import 'package:furniture_admin/screen/company/add_company_screen.dart';
 import 'package:furniture_admin/screen/company/edit_company_screen.dart';
@@ -24,7 +25,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int current = 0;
   List<String> imgList = [
-     ];
+    'https://cdn.shopify.com/s/files/1/0891/4784/articles/Top_12_Furniture_Store_in_Calgary_1024x1024.jpg?v=1663218020',
+    'https://cdn.shopify.com/s/files/1/0891/4784/articles/Top_12_Furniture_Store_in_Calgary_1024x1024.jpg?v=1663218020',
+    'https://cdn.shopify.com/s/files/1/0891/4784/articles/Top_12_Furniture_Store_in_Calgary_1024x1024.jpg?v=1663218020',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,10 +52,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const CircleAvatar(
-                      radius: 26,
-                      backgroundImage:
-                          AssetImage('assets/images/splashLogo.png'),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: white,
+                          borderRadius: BorderRadius.circular(45)),
+                      child: Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: InkWell(
+                          onTap: (){loginController.signOut();},
+                          child: CircleAvatar(
+                            radius: 25.0,
+                            backgroundColor: Colors.transparent,
+                            backgroundImage:
+                                AssetImage('assets/images/splashLogo.png'),
+                          ),
+                        ),
+                      ),
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -60,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: EdgeInsets.all(2),
                       child: IconButton(
                         onPressed: () {
-                          Get.to(()=> BugsScreen());
+                          Get.to(() => BugsScreen());
                         },
                         icon: SvgPicture.asset(
                           'assets/images/bug.svg',
@@ -142,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'assets/images/addCompany.svg',
                           title: 'Add Comapny',
                           ontap: () {
-                             Get.offAll(() => AddCompanyScreen());
+                            Get.offAll(() => AddCompanyScreen());
                           },
                         ),
                         MainCard(
@@ -156,22 +172,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'assets/images/edit.svg',
                           title: 'Edit Comapny',
                           ontap: () {
-                            Get.to(()=> EditCompanyScreen());
-
+                            Get.to(() => EditCompanyScreen());
                           },
                         ),
                         MainCard(
                           image: 'assets/images/document.svg',
                           title: 'Orders',
                           ontap: () {
-                            Get.to(()=> OrderScreen());
+                            Get.to(() => OrderScreen());
                           },
                         ),
                         MainCard(
                           image: 'assets/images/chat1.svg',
                           title: 'All Chats',
                           ontap: () {
-                             Get.to(() => ChatViewScreen());
+                            Get.to(() => ChatViewScreen());
                           },
                         ),
                       ],

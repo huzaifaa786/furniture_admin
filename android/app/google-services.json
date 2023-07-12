@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "826383560726",
+    "project_id": "furniture-6aebb",
+    "storage_bucket": "furniture-6aebb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826383560726:android:0d216fca14336c27b98537",
+        "android_client_info": {
+          "package_name": "com.example.furniture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826383560726-rh412e333v56lkqhgcbl7a67fl8d6ho3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJxelLmqlnz_gW9zjAFBtofmMOBU-SYC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826383560726-rh412e333v56lkqhgcbl7a67fl8d6ho3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "826383560726-5d2lt6qseffj8vdu1tn92qrrsm0v6bc0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.furniture"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826383560726:android:7cd1b1c280e84d99b98537",
+        "android_client_info": {
+          "package_name": "com.example.furniture_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826383560726-rh412e333v56lkqhgcbl7a67fl8d6ho3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJxelLmqlnz_gW9zjAFBtofmMOBU-SYC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826383560726-rh412e333v56lkqhgcbl7a67fl8d6ho3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "826383560726-5d2lt6qseffj8vdu1tn92qrrsm0v6bc0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.furniture"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

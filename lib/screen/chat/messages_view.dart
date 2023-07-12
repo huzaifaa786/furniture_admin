@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:furniture_admin/values/colors.dart';
 import '../../static/large_button.dart';
 
@@ -490,11 +491,16 @@ class _MyWidgetState extends State<MessageViewScreen> {
                         decoration: InputDecoration(
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              'assets/images/location.png',
-                              width: 1,
-                              height: 1,
-                              fit: BoxFit.fill,
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              decoration:BoxDecoration(borderRadius: BorderRadius.circular(30),color: mainColor),
+                              child: SvgPicture.asset(
+                                'assets/images/location.svg',
+                                // width: 1,
+                                // height: 1,
+                                // fit: BoxFit.fill,
+                              ),
                             ),
                           ),
 
@@ -518,11 +524,11 @@ class _MyWidgetState extends State<MessageViewScreen> {
                         decoration: InputDecoration(
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              'assets/images/location.png',
-                              width: 1,
-                              height: 1,
-                              fit: BoxFit.fill,
+                            child: SvgPicture.asset(
+                               'assets/images/location.svg',
+                              // width: 1,
+                              // height: 1,
+                              // fit: BoxFit.fill,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(

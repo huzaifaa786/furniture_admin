@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'assets/images/addCompany.svg',
                           title: 'Add Comapny',
                           ontap: () {
-                            Get.offAll(() => AddCompanyScreen());
+                            Get.to(() => AddCompanyScreen());
                           },
                         ),
                         MainCard(

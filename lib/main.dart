@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:furniture_admin/helper/loading.dart';
 import 'package:furniture_admin/screen/auth/login_controller.dart';
 import 'package:furniture_admin/screen/auth/login_screen.dart';
+import 'package:furniture_admin/screen/company/company_controller.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/screen/splash_screen/splash_screen.dart';
 import 'package:furniture_admin/services/auth_service.dart';
@@ -19,12 +20,12 @@ void main() async {
       .then((value) {
     Get.put(AuthService());
     Get.put(LoginController());
+    Get.put(CompanyController());
   });
   runApp(const MyApp());
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 

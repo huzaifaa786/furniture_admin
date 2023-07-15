@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BioInputField extends StatelessWidget {
   const BioInputField(
@@ -15,16 +16,16 @@ class BioInputField extends StatelessWidget {
       this.imageIcon,
       this.validator,
       this.autovalidateMode,
-      // this.validate,
+      this.validate,
       this.icon,
-      this.type = TextInputType.text,
+      this.type = TextInputType.multiline,
       this.fontSize = 17.0,
       this.onpressed})
       : super(key: key);
 
   final controller;
   final validator;
-  // final RxBool? validate;
+  final RxBool? validate;
   final obscure;
   final hint;
   final type;
@@ -53,10 +54,10 @@ class BioInputField extends StatelessWidget {
       obscureText: obscure,
       keyboardType: type,
       validator: validator,
-      // autovalidateMode: autovalidateMode ??
-      //     (validate == true.obs
-      //         ? AutovalidateMode.always
-      //         : AutovalidateMode.onUserInteraction),
+      autovalidateMode: autovalidateMode ??
+          (validate == true.obs
+              ? AutovalidateMode.always
+              : AutovalidateMode.onUserInteraction),
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(color: Colors.grey),

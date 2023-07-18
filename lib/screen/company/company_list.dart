@@ -1,24 +1,34 @@
-// ignore_for_file: deprecated_member_use, prefer_const_constructors
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:furniture_admin/models/company.dart';
+import 'package:flutter/widgets.dart';
 import 'package:furniture_admin/screen/company/company_controller.dart';
-import 'package:furniture_admin/screen/sales/comapny_sale.dart';
+import 'package:furniture_admin/screen/company/edit_company_controller.dart';
+import 'package:furniture_admin/screen/company/edit_company_screen.dart';
 import 'package:furniture_admin/static/topbar.dart';
 import 'package:get/get.dart';
 
-class SalesScreen extends StatefulWidget {
-  const SalesScreen({super.key});
+class ComapanyList extends StatefulWidget {
+  const ComapanyList({super.key});
 
   @override
-  State<SalesScreen> createState() => _SalesScreenState();
+  State<ComapanyList> createState() => _ComapanyListState();
 }
 
-class _SalesScreenState extends State<SalesScreen> {
+class _ComapanyListState extends State<ComapanyList> {
+
+  final CompanyController companyController = Get.put(CompanyController());
+
+  @override
+  void initState() {
+    super.initState();
+    companyController.enableFetchCompanies(); // Call your function from the controller here
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  GetBuilder<CompanyController>(
-      builder: (companyController) => Scaffold(
+    return   GetBuilder<CompanyController>(
+      builder: (companyController) {
+        return Scaffold(
         body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(left:15.0,right: 15.0),
@@ -28,7 +38,7 @@ class _SalesScreenState extends State<SalesScreen> {
                     ontap: () {
                       Get.back();
                     },
-                    text: 'Sales',
+                    text: 'Companies',
                   ),
                   SizedBox(
                     height: 10.0,
@@ -73,7 +83,7 @@ class _SalesScreenState extends State<SalesScreen> {
                                         //   maxHeight: 20,
                                         // ),
                                         color: Colors.green,
-                                        child: Image.asset(company.companyImage1,fit: BoxFit.fill,),
+                                        child: CachedNetworkImage(imageUrl : company.companyImage1,fit: BoxFit.fill,),
                                       ),
                                     ),
                                   ),
@@ -88,9 +98,8 @@ class _SalesScreenState extends State<SalesScreen> {
                                     size: 30,
                                   ),
                                   onTap: () {
-                                    Get.to(() => CompanySalesScreen(
-                                          company: company,
-                                        ));
+                                        Get.put(EditCompanyController(company: company));
+                                    Get.to(() => EditCompanyScreen());
                                   },
                                 ),
                               ),
@@ -102,6 +111,7 @@ class _SalesScreenState extends State<SalesScreen> {
                   ),
                 ],
               ),
-            ))));
+            )));
+  });
   }
 }

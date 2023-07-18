@@ -1,17 +1,23 @@
 class Company {
+  final String id;
+  final String companyImage1;
+  final String companyImage2;
+  final String companyImage3;
+  final DateTime startTime;
+  final DateTime endTime;
+  final String englishBio;
+  final String arabicBio;
   final String name;
-  final String imageUrl;
 
-  Company(
-      {required this.name, required this.imageUrl});
+  Company({
+    required this.id,
+    required this.companyImage1,
+    required this.companyImage2,
+    required this.companyImage3,
+    required this.startTime,
+    required this.endTime,
+    required this.englishBio,
+    required this.arabicBio,
+    required this.name,
+  });
 }
-
-List<Company> companies = [
-  Company(name: "Company 1", imageUrl: "assets/images/company/company1.jpg"),
-  Company(name: "Company 2", imageUrl: "assets/images/company/comapny.jpg"),
-  Company(name: "Company 1", imageUrl: "assets/images/company/comapny.jpg"),
-  Company(name: "Company 2", imageUrl: "assets/images/company/comapny.jpg"),
-  Company(name: "Company 1", imageUrl: "assets/images/company/comapny.jpg"),
-  Company(name: "Company 2", imageUrl: "assets/images/company/comapny.jpg"),
-  // Add more company instances as needed
-];

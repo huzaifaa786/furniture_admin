@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:furniture_admin/helper/general.dart';
 import 'package:furniture_admin/screen/company/company_controller.dart';
 import 'package:furniture_admin/static/bio_input_field.dart';
+import 'package:furniture_admin/static/company_photo_picker.dart';
 import 'package:furniture_admin/static/input_field.dart';
 import 'package:furniture_admin/static/input_field1.dart';
 import 'package:furniture_admin/static/large_button.dart';
@@ -32,49 +34,21 @@ class _MyWidgetState extends State<AddCompanyScreen> {
               children: [
                 TopBar(
                   text: ' Add Company',
-                  ontap: () {},
+                  ontap: () {
+                    Get.back();
+                  },
                 ),
-                GestureDetector(
-                    onTap: () {
-                      companyController.pickImage();
-                    },
-                    child: companyController.companyImage == null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 104,
-                            decoration: ShapeDecoration(
-                              color: Color(0x11823E13),
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                    width: 1, color: Color(0xFF823E14)),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 10),
-                                  child: Image(
-                                      image: AssetImage(
-                                          'assets/images/addcompanyy.png')),
-                                ),
-                                Text(
-                                  'Upload Photo',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600),
-                                )
-                              ],
-                            ),
-                          )
-                        : Container(
-                            child: Image.file(
-                              File(companyController.companyImage!.path),
-                              fit: BoxFit.contain,
-                            ),
-                            color: Colors.blue,
-                          )),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                     CompanyPhotoPicker(comapnyImage: companyController.companyImage1,pickImage: companyController.pickImage1),
+                     CompanyPhotoPicker(comapnyImage: companyController.companyImage2,pickImage: companyController.pickImage2),
+                     CompanyPhotoPicker(comapnyImage: companyController.companyImage3,pickImage: companyController.pickImage3),
+                
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.only(top: 20, bottom: 10),
                   child: Row(

@@ -14,14 +14,18 @@ import 'package:time_range_picker/time_range_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
 
-class CompanyController extends GetxController {
-  static CompanyController get instance => Get.find();
+class EditCompanyController extends GetxController {
+  static EditCompanyController get instance => Get.find();
+  final Company company;
 
- RxBool validateCompanyUpForm = false.obs;
- 
-List<Company> companies = <Company>[].obs;
+  EditCompanyController({required this.company});
+
+  RxBool validateCompanyUpForm = false.obs;
+
+  List<Company> companies = <Company>[].obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
 
   TimeOfDay startDefault = TimeOfDay(hour: 9, minute: 0);
   TimeOfDay endDefault = TimeOfDay(hour: 17, minute: 0);
@@ -32,46 +36,26 @@ List<Company> companies = <Company>[].obs;
   File? companyImage1;
   File? companyImage2;
   File? companyImage3;
-  
-  final name = TextEditingController();
-  final englishBio = TextEditingController();
-  final arabicBio = TextEditingController();
 
- bool _shouldFetchCompanies = false;
+  var name = TextEditingController();
+  var englishBio = TextEditingController();
+  var arabicBio = TextEditingController();
 
-  void enableFetchCompanies() {
-    _shouldFetchCompanies = true;
-    fetchCompanies();
+  @override
+  void onInit() {
+    super.onInit();
+    configEditScreen();
   }
-  
-  Future<void> fetchCompanies() async {
-     if (!_shouldFetchCompanies) return;
-    try {
-      LoadingHelper.show();
-      QuerySnapshot querySnapshot =
-          await firestore.collection('companies').get();
 
-      List<Company> fetchedCompanies = querySnapshot.docs.map((doc) {
-        return Company(
-          id: doc.id,
-          companyImage1: doc['companyImage1'],
-          companyImage2: doc['companyImage2'],
-          companyImage3: doc['companyImage3'],
-          startTime: (doc['startTime'] as Timestamp).toDate(),
-          endTime: (doc['endTime'] as Timestamp).toDate(),
-          englishBio: doc['englishBio'],
-          arabicBio: doc['arabicBio'],
-          name: doc['name'],
-        );
-      }).toList();
-
-      companies = fetchedCompanies;
-      update();
-      LoadingHelper.dismiss();
-
-    } catch (e) {
-      print('Error fetching companies: $e');
-    }
+  configEditScreen() {
+    name.text = company.name;
+    englishBio.text = company.englishBio;
+    arabicBio.text = company.arabicBio;
+    startDefault = TimeOfDay.fromDateTime(company.startTime);
+    endDefault = TimeOfDay.fromDateTime(company.endTime);
+    startTime = company.startTime;
+    endTime = company.endTime;
+    update();
   }
 
   Future pickImage1() async {
@@ -85,7 +69,8 @@ List<Company> companies = <Company>[].obs;
       print('Failed to pick image: $e');
     }
   }
-   Future pickImage2() async {
+
+  Future pickImage2() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
@@ -95,7 +80,8 @@ List<Company> companies = <Company>[].obs;
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
-  } 
+  }
+
   Future pickImage3() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -157,73 +143,91 @@ List<Company> companies = <Company>[].obs;
     print("result " + result.toString());
   }
 
-  Future<void> addCompany() async {
+  Future<void> updateCompany() async {
     try {
-    final bool isFormValid =  Validators.emptyStringValidator(englishBio.text, '') == null &&
-          Validators.emptyStringValidator(arabicBio.text,'') == null &&
-          Validators.emptyStringValidator(name.text,'') == null &&
-          Validators.emptyStringValidator(companyImage1!.path, '') == null &&
-          Validators.emptyStringValidator(companyImage2!.path, '') == null &&
-          Validators.emptyStringValidator(companyImage3!.path, '') == null ;
-        if(isFormValid) {
-          LoadingHelper.show();
-     String companyImageURL1 = await saveImagetoFirebase(companyImage1);
-     String companyImageURL2 = await saveImagetoFirebase(companyImage2);
-     String companyImageURL3 = await saveImagetoFirebase(companyImage3);
-      DocumentReference docRef = await firestore.collection('companies').add({
-        'name': name.text,
-        'companyImage1': companyImageURL1,
-        'companyImage2': companyImageURL2,
-        'companyImage3': companyImageURL3,
-        'startTime': startTime,
-        'endTime': endTime,
-        'englishBio': englishBio.text,
-        'arabicBio': arabicBio.text,
-      });
+      final bool isFormValid =
+          Validators.emptyStringValidator(englishBio.text, '') == null &&
+              Validators.emptyStringValidator(arabicBio.text, '') == null &&
+              Validators.emptyStringValidator(name.text, '') == null;
+      if (isFormValid) {
+        LoadingHelper.show();
+        DocumentReference docRef =
+            firestore.collection('companies').doc(company.id);
 
-      if (docRef.id.isNotEmpty) {
-        LoadingHelper.dismiss();
-        Get.showSnackbar(
-          GetSnackBar(
-            title: 'Success',
-            message: 'Company Registered Successfully',
-            icon: const Icon(Icons.refresh),
-            duration: const Duration(seconds: 3),
-          ),
-        );
-        Get.to(() => HomeScreen());
-        Get.delete<CompanyController>();
+// Define the data you want to update
+        Map<String, dynamic> updatedData = {
+          'name': name.text,
+          'companyImage1': company.companyImage1,
+          'companyImage2': company.companyImage2,
+          'companyImage3': company.companyImage3,
+          'startTime': startTime,
+          'endTime': endTime,
+          'englishBio': englishBio.text,
+          'arabicBio': arabicBio.text,
+        };
 
-      } else {
-        // Failed to store data
-        print('Failed to store data.');
-      }
-        }else{
-          showErrors();
+        if (companyImage1 != null) {
+          String companyImageURL1 = await saveImagetoFirebase(companyImage1);
+          updatedData['companyImage1'] = companyImageURL1;
         }
+
+        if (companyImage2 != null) {
+          String companyImageURL2 = await saveImagetoFirebase(companyImage2);
+          updatedData['companyImage2'] = companyImageURL2;
+        }
+
+        if (companyImage3 != null) {
+          String companyImageURL3 = await saveImagetoFirebase(companyImage3);
+          updatedData['companyImage3'] = companyImageURL3;
+        }
+
+// Update the document with the new data
+        await docRef.update(updatedData);
+
+        if (docRef.id.isNotEmpty) {
+          LoadingHelper.dismiss();
+          Get.showSnackbar(
+            GetSnackBar(
+              title: 'Success',
+              message: 'Company Updated Successfully',
+              icon: const Icon(Icons.refresh),
+              duration: const Duration(seconds: 3),
+            ),
+          );
+          Get.to(() => HomeScreen());
+          Get.delete<EditCompanyController>();
+        } else {
+          // Failed to store data
+          print('Failed to store data.');
+        }
+      } else {
+        showErrors();
+      }
     } catch (e) {
       // Error occurred while storing data
       print('Error storing data: $e');
     }
   }
-  saveImagetoFirebase(image) async
-  {
-     firebase_storage.Reference ref = storage
-          .ref()
-          .child('company_images/${DateTime.now().millisecondsSinceEpoch}.jpg');
-      firebase_storage.UploadTask uploadTask =
-          ref.putFile(File(image.path));
-      firebase_storage.TaskSnapshot storageTaskSnapshot =
-          await uploadTask.whenComplete(() => null);
-      return await storageTaskSnapshot.ref.getDownloadURL();
 
+  String generateUniqueDocumentID() {
+    // Example: Using DateTime to generate a unique ID
+    return DateTime.now().millisecondsSinceEpoch.toString();
   }
 
-    void showErrors() {
+  saveImagetoFirebase(image) async {
+    firebase_storage.Reference ref = storage
+        .ref()
+        .child('company_images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+    firebase_storage.UploadTask uploadTask = ref.putFile(File(image.path));
+    firebase_storage.TaskSnapshot storageTaskSnapshot =
+        await uploadTask.whenComplete(() => null);
+    return await storageTaskSnapshot.ref.getDownloadURL();
+  }
+
+  void showErrors() {
     validateCompanyUpForm = true.obs;
     update();
   }
-
 
   @override
   void onClose() {

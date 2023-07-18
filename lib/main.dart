@@ -20,7 +20,6 @@ void main() async {
       .then((value) {
     Get.put(AuthService());
     Get.put(LoginController());
-    Get.put(CompanyController());
   });
   runApp(const MyApp());
 }

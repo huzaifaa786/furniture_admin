@@ -7,6 +7,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_admin/constants/constants.dart';
 import 'package:furniture_admin/screen/bugs/bugs.dart';
 import 'package:furniture_admin/screen/company/add_company_screen.dart';
+import 'package:furniture_admin/screen/company/company_controller.dart';
+import 'package:furniture_admin/screen/company/company_list.dart';
+import 'package:furniture_admin/screen/company/edit_company_controller.dart';
 import 'package:furniture_admin/screen/company/edit_company_screen.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/static/main_card.dart';
@@ -59,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Padding(
                         padding: EdgeInsets.all(2.0),
                         child: InkWell(
-                          onTap: (){loginController.signOut();},
+                          onTap: () {
+                            loginController.signOut();
+                          },
                           child: CircleAvatar(
                             radius: 25.0,
                             backgroundColor: Colors.transparent,
@@ -158,6 +163,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'assets/images/addCompany.svg',
                           title: 'Add Comapny',
                           ontap: () {
+                            Get.put(CompanyController());
+
                             Get.to(() => AddCompanyScreen());
                           },
                         ),
@@ -172,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'assets/images/edit.svg',
                           title: 'Edit Comapny',
                           ontap: () {
-                            Get.to(() => EditCompanyScreen());
+                            Get.to(() => ComapanyList());
                           },
                         ),
                         MainCard(

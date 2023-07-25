@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:furniture_admin/screen/auth/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    startTime();
+    // startTime();
   }
 
   @override
@@ -24,18 +25,18 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  startTime() async {
-    var duration = const Duration(seconds: 3);
-    return Timer(duration, route);
-  }
+  // startTime() async {
+  //   var duration = const Duration(seconds: 3);
+  //   return Timer(duration, route);
+  // }
 
-  route() {
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
-        ));
-  }
+  // route() {
+  //   Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => const LoginScreen(),
+  //       ));
+  // }
 }
 
 initScreen(BuildContext context) {

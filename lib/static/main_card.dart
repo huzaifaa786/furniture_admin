@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_admin/values/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:badges/badges.dart' as badges;
 
 class MainCard extends StatelessWidget {
   const MainCard({
@@ -10,10 +11,12 @@ class MainCard extends StatelessWidget {
     this.title,
     this.image,
     this.ontap,
+    this.badgeValue = '0',
   });
   final title;
   final image;
   final ontap;
+  final badgeValue;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,13 @@ class MainCard extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: white,
                 ),
-                child: FittedBox(fit: BoxFit.scaleDown,child: SvgPicture.asset(image,height: 30,width: 30)),
+                child: badges.Badge(
+                  showBadge: badgeValue == '0'? false: true,
+                  badgeContent: Text(badgeValue,style: TextStyle(color: white),),
+                  child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: SvgPicture.asset(image, height: 30, width: 30)),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),

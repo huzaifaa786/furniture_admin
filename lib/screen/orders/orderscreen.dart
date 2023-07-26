@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:furniture_admin/constants/constants.dart';
+import 'package:furniture_admin/models/order_model.dart';
+import 'package:furniture_admin/screen/orders/order_card.dart';
 
 import '../../values/colors.dart';
 
@@ -11,6 +14,16 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+    chatCount() {
+    orderController.getItemsStream();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    chatCount();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,329 +70,35 @@ class _OrderScreenState extends State<OrderScreen> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.85,
               padding: EdgeInsets.only(left: 15, right: 15),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      color: Colors.white,
-                      elevation: 10,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(5.0),
-                                        bottomRight: Radius.circular(5.0),
-                                        topLeft: Radius.circular(5.0),
-                                        topRight: Radius.circular(5.0),
-                                      ),
-                                      color: mainColor),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SvgPicture.asset(
-                                      'assets/images/orderbucket.svg',
-                                      width: 5.0,
-                                      height: 5.0,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 10, right: 90),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '#Ord68292',
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 5, bottom: 5),
-                                        child: Text(
-                                          '2 Chairs',
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                      Text(
-                                        '1 Table',
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 10, right: 10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(bottom: 10),
-                                        child: Text(
-                                          '500 AED',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: mainColor),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 10),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.18,
-                                          height: 29.67,
-                                          decoration: ShapeDecoration(
-                                            color: Colors.black.withOpacity(
-                                                0.8199999928474426),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                            shadows: [
-                                              BoxShadow(
-                                                color: Color(0x1E000000),
-                                                blurRadius: 50,
-                                                offset: Offset(20, 20),
-                                                spreadRadius: 0,
-                                              )
-                                            ],
-                                          ),
-                                          child: const Center(
-                                            child: Text(
-                                              'Update',
-                                              maxLines: null,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 9,
-                                                  fontWeight:
-                                                      FontWeight.w500),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                           
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Company Name',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w600,
-                                      height:3,
-                                    ),
-                                  ),
-                                  Text(
-                                    '03/03/2023 | 03:00 PM',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 11,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      height:3,
-                                    ),
-                                  ),
-                                ]
-                                ),
-                          
-                          ]
-                        ),
-                      ),
-                    ),
-                   
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      color: Colors.white,
-                      elevation: 10,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(5.0),
-                                        bottomRight: Radius.circular(5.0),
-                                        topLeft: Radius.circular(5.0),
-                                        topRight: Radius.circular(5.0),
-                                      ),
-                                      color: mainColor),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SvgPicture.asset(
-                                      'assets/images/orderbucket.svg',
-                                      width: 5.0,
-                                      height: 5.0,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 10, right: 90),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '#Ord68292',
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 5, bottom: 5),
-                                        child: Text(
-                                          '2 Chairs',
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                      Text(
-                                        '1 Table',
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 10, right: 10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(bottom: 10),
-                                        child: Text(
-                                          '500 AED',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: mainColor),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 10),
-                                        child: GestureDetector(
-                                          onTap:(){},
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.18,
-                                            height: 29.67,
-                                            decoration: ShapeDecoration(
-                                              color: Colors.black.withOpacity(
-                                                  0.8199999928474426),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8)),
-                                              shadows: [
-                                                BoxShadow(
-                                                  color: Color(0x1E000000),
-                                                  blurRadius: 50,
-                                                  offset: Offset(20, 20),
-                                                  spreadRadius: 0,
-                                                )
-                                              ],
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                'Update',
-                                                maxLines: null,
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 9,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                           
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Company Name',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w600,
-                                      height:3,
-                                    ),
-                                  ),
-                                  Text(
-                                    '03/03/2023 | 03:00 PM',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 11,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      height:3,
-                                    ),
-                                  ),
-                                ]
-                                ),
-                          
-                          ]
-                        ),
-                      ),
-                    ),
-                   
-                  ],
+              child: StreamBuilder<List<OrderModel>>(
+                  stream: orderController
+                      .getItemsStream(), // Use the stream you created to fetch data
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      print(snapshot.error);
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else {
+                      List<OrderModel>? items = snapshot.data;
+
+                      return ListView.builder(
+                        itemCount: items!.length,
+                        itemBuilder: (context, index) {
+                          OrderModel item = items[index];
+                          return OrderCard(
+                            id: item.id,
+                            amount: item.amount.toString(),
+                            description: item.description,
+                            date: item.date,
+                            time: item.time,
+                          );
+                        },
+                      );
+                    }
+                  },
                 ),
-              ),
+             
             ),
           ),
         ],

@@ -10,14 +10,13 @@ import 'package:furniture_admin/screen/bugs/bugs.dart';
 import 'package:furniture_admin/screen/company/add_company_screen.dart';
 import 'package:furniture_admin/screen/company/company_controller.dart';
 import 'package:furniture_admin/screen/company/company_list.dart';
-import 'package:furniture_admin/screen/company/edit_company_controller.dart';
-import 'package:furniture_admin/screen/company/edit_company_screen.dart';
+
 import 'package:furniture_admin/screen/main_screen.dart/main_controller.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/static/main_card.dart';
 import 'package:furniture_admin/values/colors.dart';
 import 'package:get/get.dart';
-import '../chat/chat_view.dart';
+
 import '../orders/orderscreen.dart';
 
 class HomeScreen extends StatefulWidget {

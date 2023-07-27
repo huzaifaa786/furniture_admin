@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:furniture_admin/screen/auth/login_controller.dart';
+import 'package:furniture_admin/screen/bugs/bug_controller.dart';
 import 'package:furniture_admin/screen/company/company_controller.dart';
 import 'package:furniture_admin/screen/company/edit_company_controller.dart';
 import 'package:furniture_admin/screen/main_screen.dart/main_controller.dart';
@@ -17,3 +18,4 @@ FirebaseAuth auth = FirebaseAuth.instance;
 FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 MainController mainController = MainController.instance;
 OrderController orderController = OrderController.instance;
+BugController bugController = BugController.instance;

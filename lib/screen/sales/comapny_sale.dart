@@ -19,6 +19,14 @@ class CompanySalesScreen extends StatefulWidget {
 }
 
 class _CompanySalesScreenState extends State<CompanySalesScreen> {
+
+     @override
+  void initState() {
+    print('object');
+    saleController.fetchSale(widget.company!.id); // Call your function from the controller here
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SaleController>(
@@ -79,7 +87,7 @@ class _CompanySalesScreenState extends State<CompanySalesScreen> {
                                         ? saleController.format1 = 'week'
                                         : saleController.format1 = 'month';
                                     saleController.format = format;
-                                    // saleController.getSlaes();
+                                    saleController.getsale();
                                   });
                                 },
                                 startingDayOfWeek: StartingDayOfWeek.monday,
@@ -106,7 +114,7 @@ class _CompanySalesScreenState extends State<CompanySalesScreen> {
                     child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          saleController.price.toString() + ' AED',
+                          saleController.sum.toString() + ' AED',
                           style: TextStyle(
                               color: mainColor,
                               fontSize: 28,

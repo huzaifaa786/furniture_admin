@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:furniture_admin/models/company.dart';
-import 'package:furniture_admin/screen/company/company_controller.dart';
+import 'package:furniture_admin/constants/constants.dart';
 import 'package:furniture_admin/screen/sales/comapny_sale.dart';
+import 'package:furniture_admin/screen/sales/salecontroller.dart';
 import 'package:furniture_admin/static/topbar.dart';
 import 'package:get/get.dart';
 
@@ -15,12 +15,19 @@ class SalesScreen extends StatefulWidget {
 }
 
 class _SalesScreenState extends State<SalesScreen> {
+
+    @override
+  void initState() {
+    saleController.fetchCompanies(); // Call your function from the controller here
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
-    return  GetBuilder<CompanyController>(
-      builder: (companyController) => Scaffold(
-        body: SafeArea(
-            child: Padding(
+    return  Scaffold(
+      body: SafeArea(
+          child:GetBuilder<SaleController>(
+      builder: (controller) => Padding(
               padding: const EdgeInsets.only(left:15.0,right: 15.0),
               child: Column(
                 children: [
@@ -37,9 +44,9 @@ class _SalesScreenState extends State<SalesScreen> {
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.94,
                       child: ListView.builder(
-                        itemCount: companyController.companies.length,
+                        itemCount: saleController.companies.length,
                         itemBuilder: (context, index) {
-                          final company = companyController.companies[index];
+                          final company = saleController.companies[index];
                           return ClipRRect(
                             child: Padding(
                               padding: const EdgeInsets.only(bottom: 20.0),
@@ -73,7 +80,7 @@ class _SalesScreenState extends State<SalesScreen> {
                                         //   maxHeight: 20,
                                         // ),
                                         color: Colors.green,
-                                        child: Image.asset(company.companyImage1,fit: BoxFit.fill,),
+                                        child: Image.network(company.companyImage1,fit: BoxFit.fill,),
                                       ),
                                     ),
                                   ),
@@ -89,7 +96,7 @@ class _SalesScreenState extends State<SalesScreen> {
                                   ),
                                   onTap: () {
                                     Get.to(() => CompanySalesScreen(
-                                          company: company,
+                                          company: saleController.companies[index],
                                         ));
                                   },
                                 ),
@@ -102,6 +109,7 @@ class _SalesScreenState extends State<SalesScreen> {
                   ),
                 ],
               ),
-            ))));
+            ),
+          )));
   }
 }

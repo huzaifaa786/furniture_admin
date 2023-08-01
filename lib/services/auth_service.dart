@@ -54,9 +54,7 @@ class AuthService extends GetxController {
           // You can also show an error message to the user or perform other actions as needed.
         }
         LoadingHelper.dismiss();
-        Get.offAll(() => const HomeScreen());
       } else {
-        Get.to(() => const LoginScreen());
       }
     } on FirebaseAuthException catch (e) {
       return e.message;

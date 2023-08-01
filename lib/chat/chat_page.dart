@@ -94,11 +94,30 @@ class ChatPageState extends State<ChatPage> {
     } else {
       groupChatId = '$peerId-$currentUserId';
     }
-    FirebaseFirestore.instance
+    // FirebaseFirestore.instance
+    //     .collection(FirestoreConstants.pathMessageCollection)
+    //     .doc(groupChatId)
+    //     .update({
+    //   'companySeen': true,
+    // });
+    final docRef = FirebaseFirestore.instance
         .collection(FirestoreConstants.pathMessageCollection)
-        .doc(groupChatId)
-        .update({
-      'companySeen': true,
+        .doc(groupChatId);
+
+    docRef.get().then((docSnapshot) {
+      if (docSnapshot.exists) {
+        // Document exists, proceed with the update
+        docRef.update({'companySeen': true}).then((_) {
+          print('Update successful');
+        }).catchError((error) {
+          print('Error updating document: $error');
+        });
+      } else {
+        // Document does not exist, handle accordingly
+        print('Document does not exist');
+      }
+    }).catchError((error) {
+      print('Error fetching document: $error');
     });
     // chatProvider.updateDataFirestore(
     //   FirestoreConstants.Pa,

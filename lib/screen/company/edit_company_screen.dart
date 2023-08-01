@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_admin/helper/general.dart';
+import 'package:furniture_admin/models/company.dart';
 import 'package:furniture_admin/screen/company/edit_company_controller.dart';
 import 'package:furniture_admin/static/bio_input_field.dart';
 import 'package:furniture_admin/static/company_photo_picker.dart';
@@ -12,7 +13,8 @@ import 'package:furniture_admin/values/colors.dart';
 import 'package:get/get.dart';
 
 class EditCompanyScreen extends StatefulWidget {
-  const EditCompanyScreen({super.key});
+  const EditCompanyScreen({super.key, required this.company});
+  final Company? company;
 
   @override
   State<EditCompanyScreen> createState() => _MyWidgetState();
@@ -39,10 +41,21 @@ class _MyWidgetState extends State<EditCompanyScreen> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                     EditCompanyPhotoPicker(comapnyImage: companyController.companyImage1,pickImage: companyController.pickImage1,originalImage: companyController.company.companyImage1),
-                     EditCompanyPhotoPicker(comapnyImage: companyController.companyImage2,pickImage: companyController.pickImage2,originalImage: companyController.company.companyImage2),
-                     EditCompanyPhotoPicker(comapnyImage: companyController.companyImage3,pickImage: companyController.pickImage3,originalImage: companyController.company.companyImage3),
-                
+                      EditCompanyPhotoPicker(
+                          comapnyImage: companyController.companyImage1,
+                          pickImage: companyController.pickImage1,
+                          originalImage:
+                              companyController.company.companyImage1),
+                      EditCompanyPhotoPicker(
+                          comapnyImage: companyController.companyImage2,
+                          pickImage: companyController.pickImage2,
+                          originalImage:
+                              companyController.company.companyImage2),
+                      EditCompanyPhotoPicker(
+                          comapnyImage: companyController.companyImage3,
+                          pickImage: companyController.pickImage3,
+                          originalImage:
+                              companyController.company.companyImage3),
                     ],
                   ),
                 ),

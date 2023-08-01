@@ -3,7 +3,7 @@ import 'package:furniture_admin/helper/general.dart';
 import 'package:furniture_admin/models/company.dart';
 import 'package:furniture_admin/screen/company/edit_company_controller.dart';
 import 'package:furniture_admin/static/bio_input_field.dart';
-import 'package:furniture_admin/static/company_photo_picker.dart';
+
 import 'package:furniture_admin/static/edit_company_photo.dart';
 import 'package:furniture_admin/static/input_field.dart';
 import 'package:furniture_admin/static/large_button.dart';

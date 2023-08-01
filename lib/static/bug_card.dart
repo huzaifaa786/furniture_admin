@@ -3,15 +3,26 @@
 import 'package:flutter/material.dart';
 
 class BugCard extends StatelessWidget {
-  const BugCard({super.key, this.ontap});
+  const BugCard(
+      {super.key,
+      this.date,
+      this.amount,
+      this.id,
+      this.description,
+      this.image,
+      this.ontap});
+  final description;
+  final date;
+  final id;
+  final amount;
+  final image;
   final ontap;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: ontap,
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0, bottom: 8,left: 1,right: 1),
+        padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 1, right: 1),
         child: Container(
           padding: EdgeInsets.only(top: 4, bottom: 4, left: 12),
           decoration: BoxDecoration(
@@ -28,7 +39,7 @@ class BugCard extends StatelessWidget {
           child: Row(
             children: [
               Image(
-                image: AssetImage('assets/images/bugimg.png'),
+                image: NetworkImage(image),
                 height: 80,
                 width: 70,
               ),
@@ -36,7 +47,7 @@ class BugCard extends StatelessWidget {
                   padding: EdgeInsets.only(left: 8),
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis auctor nisl. Read More',
+                    description,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ))

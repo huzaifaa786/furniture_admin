@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, prefer_is_empty, avoid_print, prefer_interpolation_to_compose_strings
+// ignore_for_file: prefer_final_fields, sort_child_properties_last, prefer_const_constructors, avoid_unnecessary_containers, prefer_is_empty, avoid_print, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables
 
 import 'dart:async';
 import 'dart:io';
@@ -7,12 +7,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:furniture_admin/chat/bill_sent_model.dart';
-import 'package:furniture_admin/chat/constants.dart';
-import 'package:furniture_admin/chat/full_photo_page.dart';
+import 'package:furniture_admin/screen/chat/constants.dart';
+import 'package:furniture_admin/screen/chat/full_photo_page.dart';
 import 'package:furniture_admin/constants/constants.dart';
 import 'package:furniture_admin/models/models.dart';
-import 'package:furniture_admin/chat/controller.dart';
+import 'package:furniture_admin/screen/chat/controller.dart';
 import 'package:furniture_admin/screen/auth/login_screen.dart';
 import 'package:furniture_admin/static/large_button.dart';
 import 'package:furniture_admin/values/Validator.dart';
@@ -388,7 +387,7 @@ class ChatPageState extends State<ChatPage> {
                                       Text(
                                         messageChat.content
                                             .split("~~")[3]
-                                            .split(":")[1]
+                                            .split("-")[1]
                                             .trim(),
                                         style: TextStyle(
                                           color: Colors.white,
@@ -640,7 +639,7 @@ class ChatPageState extends State<ChatPage> {
                                           Text(
                                             messageChat.content
                                                 .split("~~")[3]
-                                                .split(":")[1]
+                                                .split("-")[1]
                                                 .trim(),
                                             style:
                                                 TextStyle(color: Colors.black),
@@ -777,7 +776,7 @@ class ChatPageState extends State<ChatPage> {
     final dateformatter =
         FilteringTextInputFormatter.allow(RegExp(r'^[0-9/]*$'));
     final timeformatter =
-        FilteringTextInputFormatter.allow(RegExp(r'^[0-9-]*$'));
+        FilteringTextInputFormatter.allow(RegExp(r'^[0-9:]*$'));
 
     Alert(
         context: context,
@@ -923,7 +922,7 @@ class ChatPageState extends State<ChatPage> {
                         priceController.text +
                         '~~DATE:' +
                         dateController.text +
-                        '~~TIME:' +
+                        '~~TIME-' +
                         timeController.text;
                     onSendMessage(bill, TypeMessage.bill);
                     Navigator.pop(context);

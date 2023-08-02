@@ -22,7 +22,6 @@ class _CompanySalesScreenState extends State<CompanySalesScreen> {
 
      @override
   void initState() {
-    print('object');
     saleController.fetchSale(widget.company!.id); // Call your function from the controller here
     super.initState();
 

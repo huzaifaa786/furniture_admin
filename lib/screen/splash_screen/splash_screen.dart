@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:furniture_admin/screen/auth/login_screen.dart';
+import 'package:furniture_admin/services/auth_service.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // startTime();
+    goto();
   }
 
   @override
@@ -25,18 +27,10 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  // startTime() async {
-  //   var duration = const Duration(seconds: 3);
-  //   return Timer(duration, route);
-  // }
-
-  // route() {
-  //   Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => const LoginScreen(),
-  //       ));
-  // }
+  void goto() async {
+    await Future.delayed(Duration(seconds: 1));
+    Get.put(AuthService());
+  }
 }
 
 initScreen(BuildContext context) {

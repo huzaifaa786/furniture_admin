@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:furniture_admin/chat/chat_page.dart';
+import 'package:furniture_admin/screen/chat/chat_page.dart';
 import 'package:furniture_admin/static/topbar.dart';
 import 'package:furniture_admin/values/colors.dart';
 import 'package:get/get.dart';

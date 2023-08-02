@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 import 'package:furniture_admin/constants/constants.dart';
@@ -14,7 +16,7 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-    chatCount() {
+  chatCount() {
     orderController.getItemsStream();
     setState(() {});
   }
@@ -24,6 +26,7 @@ class _OrderScreenState extends State<OrderScreen> {
     chatCount();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,36 +72,37 @@ class _OrderScreenState extends State<OrderScreen> {
           Flexible(
             child: Container(
               height: MediaQuery.of(context).size.height * 0.85,
-              padding: EdgeInsets.only(left: 15, right: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               child: StreamBuilder<List<OrderModel>>(
-                  stream: orderController
-                      .getItemsStream(), // Use the stream you created to fetch data
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      print(snapshot.error);
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else {
-                      List<OrderModel>? items = snapshot.data;
-
-                      return ListView.builder(
-                        itemCount: items!.length,
-                        itemBuilder: (context, index) {
-                          OrderModel item = items[index];
-                          return OrderCard(
-                            id: item.id,
-                            amount: item.amount.toString(),
-                            description: item.description,
-                            date: item.date,
-                            time: item.time,
-                          );
-                        },
-                      );
-                    }
-                  },
-                ),
-             
+                stream: orderController
+                    .getItemsStream(), // Use the stream you created to fetch data
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    List<OrderModel>? items = snapshot.data;
+                    return ListView.builder(
+                      itemCount: items!.length,
+                      itemBuilder: (context, index) {
+                        OrderModel item = items[index];
+                        return OrderCard(
+                          id: item.id,
+                          amount: item.amount.toString(),
+                          description: item.description,
+                          date: item.date,
+                          time: item.time,
+                          companyName: item.companyName,
+                          status: item.status,
+                          user: item.userId,
+                          company: item.companyId
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
             ),
           ),
         ],

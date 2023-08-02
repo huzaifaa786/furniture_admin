@@ -15,6 +15,7 @@ class SaleController extends GetxController {
   void onFormatChanged(DateTime date) {
     today = date;
     ourdate = date;
+    getsale();
     update();
   }
 
@@ -36,7 +37,6 @@ class SaleController extends GetxController {
           await firestore.collection('companies').get();
 
       List<Company> fetchedCompanies = querySnapshot.docs.map((doc) {
-        print(List<Company>);
         return Company(
           id: doc.id,
           companyImage1: doc['companyImage1'],
@@ -67,6 +67,7 @@ class SaleController extends GetxController {
       QuerySnapshot querySnapshot = await firestore
           .collection('orders')
           .where('companyId', isEqualTo: id)
+          .where('status', isEqualTo: 3)
           .get();
 
       List<OrderModel> fetchSale = querySnapshot.docs.map((doc) {
@@ -81,8 +82,9 @@ class SaleController extends GetxController {
             status: doc['status'],
             description: doc['description']);
       }).toList();
-
+      orders = <OrderModel>[].obs;
       orders = fetchSale;
+      getsale();
       update();
       LoadingHelper.dismiss();
     } catch (e) {
@@ -96,14 +98,25 @@ class SaleController extends GetxController {
     List<OrderModel> fetchSales;
     fetchSales = orders;
     sum = 0;
-    for (var sale in orders) {
-      DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(int.parse(sale.id!));
-      DateTime formattedDate = DateTime.utc(dateTime.year, dateTime.month, dateTime.day, 0, 0, 0, 0);
-      if (formattedDate.toUtc() == today.toUtc()) {
+    for (var sale in fetchSales) {
+      DateTime dateTime =
+          DateTime.fromMillisecondsSinceEpoch(int.parse(sale.id!));
+      DateTime formattedDate =
+          DateTime.utc(dateTime.year, dateTime.month, dateTime.day, 0, 0, 0, 0);
+      DateTime formattedTodate =
+          DateTime.utc(today.year, today.month, today.day, 0, 0, 0, 0);
+      if (formattedDate.toUtc() == formattedTodate.toUtc()) {
         sum += sale.amount!;
       }
     }
     update();
     return sum;
+  }
+
+  clear() {
+    ourdate = DateTime.now();
+    today = DateTime.now();
+    sum = 0;
+    update();
   }
 }

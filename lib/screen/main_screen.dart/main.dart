@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:furniture_admin/chat/chat_view.dart';
+import 'package:furniture_admin/screen/chat/chat_list.dart';
 import 'package:furniture_admin/constants/constants.dart';
 import 'package:furniture_admin/screen/bugs/bugs.dart';
 import 'package:furniture_admin/screen/company/add_company_screen.dart';

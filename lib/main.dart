@@ -11,6 +11,7 @@ import 'package:furniture_admin/screen/orders/order_controller.dart';
 import 'package:furniture_admin/screen/sales/salecontroller.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/screen/splash_screen/splash_screen.dart';
+import 'package:furniture_admin/services/notification_service.dart';
 import 'package:furniture_admin/values/styles.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,7 @@ void main() async {
     Get.put(OrderController());
     Get.put(SaleController());
     Get.put(BugController());
+    Get.put(NotificationService());
   });
   runApp(const MyApp());
 }

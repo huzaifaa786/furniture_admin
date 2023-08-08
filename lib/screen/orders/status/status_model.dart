@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_admin/constants/constants.dart';
 import 'package:furniture_admin/screen/orders/status/status_method.dart';
@@ -8,7 +9,12 @@ import 'package:furniture_admin/values/colors.dart';
 import 'package:get/get.dart';
 
 class StatusScreen extends StatefulWidget {
-  const StatusScreen({super.key, required this.status, required this.id,required this.userId,required this.companyId});
+  const StatusScreen(
+      {super.key,
+      required this.status,
+      required this.id,
+      required this.userId,
+      required this.companyId});
 
   final int? status;
   final String? id;
@@ -48,7 +54,28 @@ class _StatusScreenState extends State<StatusScreen> {
   @override
   void initState() {
     val();
+    fetchUserToken();
     super.initState();
+  }
+
+  String userToken = '';
+  void fetchUserToken() async {
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.userId)
+          .get();
+
+      if (snapshot.exists) {
+        setState(() {
+          userToken = snapshot['token'];
+        });
+      } else {
+        print('User not found');
+      }
+    } catch (error) {
+      print('Error fetching user token: $error');
+    }
   }
 
   @override
@@ -124,7 +151,8 @@ class _StatusScreenState extends State<StatusScreen> {
                                           ? 2
                                           : 3,
                               widget.userId,
-                              widget.companyId);
+                              widget.companyId,
+                              userToken);
                 },
               ),
             ],

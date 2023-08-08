@@ -8,6 +8,7 @@ import 'package:furniture_admin/screen/main_screen.dart/main_controller.dart';
 import 'package:furniture_admin/screen/orders/order_controller.dart';
 import 'package:furniture_admin/screen/sales/salecontroller.dart';
 import 'package:furniture_admin/services/auth_service.dart';
+import 'package:furniture_admin/services/notification_service.dart';
 
 SaleController saleController = SaleController.instance;
 LoginController loginController = LoginController.instance;
@@ -19,3 +20,4 @@ FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 MainController mainController = MainController.instance;
 OrderController orderController = OrderController.instance;
 BugController bugController = BugController.instance;
+NotificationService notificationService = NotificationService.instance;

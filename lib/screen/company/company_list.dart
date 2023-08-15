@@ -100,8 +100,11 @@ class _ComapanyListState extends State<ComapanyList> {
                             ),
                             onTap: () {
                               Get.put(EditCompanyController(company: company));
-                              Get.to(() => EditCompanyScreen(company: company,))!.then((value) {
-                                 Get.delete<EditCompanyController>();
+                              Get.to(() => EditCompanyScreen(
+                                        company: company,
+                                      ))!
+                                  .then((value) {
+                                Get.delete<EditCompanyController>();
                               });
                             },
                           ),

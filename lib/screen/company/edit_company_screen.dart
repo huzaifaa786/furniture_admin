@@ -1,9 +1,12 @@
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+
 import 'package:flutter/material.dart';
+import 'package:furniture_admin/constants/constants.dart';
 import 'package:furniture_admin/helper/general.dart';
 import 'package:furniture_admin/models/company.dart';
 import 'package:furniture_admin/screen/company/edit_company_controller.dart';
 import 'package:furniture_admin/static/bio_input_field.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:furniture_admin/static/edit_company_photo.dart';
 import 'package:furniture_admin/static/input_field.dart';
 import 'package:furniture_admin/static/large_button.dart';
@@ -11,6 +14,7 @@ import 'package:furniture_admin/static/topbar.dart';
 import 'package:furniture_admin/values/Validator.dart';
 import 'package:furniture_admin/values/colors.dart';
 import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class EditCompanyScreen extends StatefulWidget {
   const EditCompanyScreen({super.key, required this.company});
@@ -29,12 +33,13 @@ class _MyWidgetState extends State<EditCompanyScreen> {
             child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.only(top: 10, right: 20, left: 20),
+            height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
                 TopBar(
                   text: ' Edit Company',
                   ontap: () {
-                   Get.back();
+                    Get.back();
                   },
                 ),
                 SingleChildScrollView(
@@ -207,11 +212,73 @@ class _MyWidgetState extends State<EditCompanyScreen> {
                         companyController.updateCompany();
                       }),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 20),
+                  child: LargeButton(
+                      title: 'Delete',
+                      color: const Color.fromARGB(255, 202, 34, 22),
+                      onPressed: () {
+                        print(companyController.company.id);
+                        delete(context, companyController.company.id);
+                        // companyController.deleteCompany();
+                      }),
+                ),
               ],
             ),
           ),
         )),
       ),
     );
+  }
+
+  delete(context, id) {
+    Alert(
+      style: const AlertStyle(
+        titleStyle: TextStyle(fontSize: 21, fontWeight: FontWeight.w400),
+      ),
+      context: context,
+      image: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: SvgPicture.asset('assets/images/logout.svg'),
+      ),
+      title: "Are you sure you want to this company?",
+      buttons: [
+        DialogButton(
+          height: 55,
+          radius: BorderRadius.circular(13),
+          child: Text(
+            "Yes",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600),
+          ),
+          onPressed: () {
+            editcompanyController.deleteCompany(id);
+          },
+          color: mainColor,
+        ),
+        DialogButton(
+          height: 55,
+          radius: BorderRadius.circular(13),
+          border: Border.all(
+            color: Colors.black54,
+          ),
+          child: Text(
+            "No",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600),
+          ),
+          onPressed: () {
+            Get.back();
+          },
+          color: Colors.black,
+        ),
+      ],
+    ).show();
   }
 }

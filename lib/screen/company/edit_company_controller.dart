@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_print
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -55,6 +57,7 @@ class EditCompanyController extends GetxController {
     endDefault = TimeOfDay.fromDateTime(company.endTime);
     startTime = company.startTime;
     endTime = company.endTime;
+
     update();
   }
 
@@ -141,6 +144,19 @@ class EditCompanyController extends GetxController {
           fontWeight: FontWeight.bold),
     );
     print("result " + result.toString());
+  }
+
+  Future<void> deleteCompany(id) async {
+    try {
+      LoadingHelper.show();
+      print(id);
+      await firestore.collection('companies').doc(id).delete();
+      Get.offAll(() => HomeScreen());
+      LoadingHelper.dismiss();
+    } catch (e) {
+      print(e);
+      LoadingHelper.dismiss();
+    }
   }
 
   Future<void> updateCompany() async {

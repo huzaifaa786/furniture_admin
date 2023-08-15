@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:furniture_admin/models/bug_model.dart';
+import 'package:furniture_admin/screen/chat/full_photo_page.dart';
 import 'package:furniture_admin/static/topbar.dart';
 import 'package:get/get.dart';
 
@@ -35,11 +36,16 @@ class _BugDetailState extends State<BugDetail> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: 10),
-                        child: Image(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(widget.bug!.image!),
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.3,
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(()=> FullPhotoPage(url: widget.bug!.image!));
+                          },
+                          child: Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(widget.bug!.image!),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.3,
+                          ),
                         ),
                       ),
                       Container(

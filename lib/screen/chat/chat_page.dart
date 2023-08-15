@@ -776,7 +776,7 @@ class ChatPageState extends State<ChatPage> {
     final dateformatter =
         FilteringTextInputFormatter.allow(RegExp(r'^[0-9/]*$'));
     final timeformatter =
-        FilteringTextInputFormatter.allow(RegExp(r'^[0-9:]*$'));
+        FilteringTextInputFormatter.allow(RegExp(r'^[0-9a-zA-Z:]*$'));
 
     Alert(
         context: context,
@@ -923,7 +923,8 @@ class ChatPageState extends State<ChatPage> {
                         '~~DATE:' +
                         dateController.text +
                         '~~TIME-' +
-                        timeController.text;
+                        timeController.text +
+                        '~~pay:' + 'false';
                     onSendMessage(bill, TypeMessage.bill);
                     Navigator.pop(context);
                   }

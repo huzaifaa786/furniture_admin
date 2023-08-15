@@ -92,8 +92,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       hint: 'Email Address',
                                       controller: loginController.email,
                                       type: TextInputType.emailAddress,
-                                      validate: loginController
-                                      .validateSignInForm,
+                                      validate:
+                                          loginController.validateSignInForm,
                                       validator: (field) =>
                                           Validators.emailValidator(field),
                                     ),
@@ -109,30 +109,31 @@ class _LoginScreenState extends State<LoginScreen> {
                                         Validators.emptyStringValidator(
                                             field, '*password'),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 12, bottom: 16),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: Text(
-                                            "Forgot Password?",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black54,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(
+                                  //       top: 12, bottom: 16),
+                                  //   child: Row(
+                                  //     mainAxisAlignment: MainAxisAlignment.end,
+                                  //     children: [
+                                  //       // GestureDetector(
+                                  //       //   onTap: () {},
+                                  //       //   child: Text(
+                                  //       //     "Forgot Password?",
+                                  //       //     style: TextStyle(
+                                  //       //         fontSize: 18,
+                                  //       //         color: Colors.black54,
+                                  //       //         fontWeight: FontWeight.w600),
+                                  //       //   ),
+                                  //       // )
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  SizedBox(height: 16),
                                   LargeButton(
                                     title: 'Login',
                                     sreenRatio: 0.9,
                                     onPressed: () {
-                                       loginController.loginUser();
+                                      loginController.loginUser();
                                     },
                                     textcolor: Colors.white,
                                     buttonWidth: 0.95,

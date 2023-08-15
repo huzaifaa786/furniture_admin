@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:furniture_admin/screen/orders/status/status_model.dart';
-
 import 'package:furniture_admin/values/colors.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -75,10 +74,12 @@ class OrderCard extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 13, fontWeight: FontWeight.w600),
                             ),
-                            Padding(
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
                               padding: EdgeInsets.only(top: 5),
                               child: Text(
                                 description,
+                                maxLines: null,
                                 style: TextStyle(
                                     fontSize: 10, fontWeight: FontWeight.w400),
                               ),
@@ -103,7 +104,7 @@ class OrderCard extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          onStatusUpdate(context, status, id,user,company);
+                          onStatusUpdate(context, status, id, user, company);
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.18,
@@ -166,10 +167,11 @@ class OrderCard extends StatelessWidget {
     );
   }
 
-  onStatusUpdate(context, status, id,user,comapny) {
+  onStatusUpdate(context, status, id, user, comapny) {
     Alert(
         context: context,
-        content: StatusScreen(status: status, id: id,userId: user,companyId: comapny),
+        content: StatusScreen(
+            status: status, id: id, userId: user, companyId: comapny),
         buttons: [
           DialogButton(
               height: 0, color: white, onPressed: () async {}, child: Text(''))

@@ -36,11 +36,50 @@ class _MyWidgetState extends State<EditCompanyScreen> {
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
-                TopBar(
-                  text: ' Edit Company',
-                  ontap: () {
-                    Get.back();
-                  },
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, bottom: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(45),
+                              border: Border.all(color: Colors.grey)),
+                          child: Icon(
+                            Icons.arrow_back_ios_new,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Edit Company',
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 21,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          print(companyController.company.id);
+                          delete(context, companyController.company.id);
+                        },
+                        child: Container(
+                            padding: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(45)),
+                            child: Icon(
+                              Icons.delete_forever_outlined,
+                              color: white,
+                            )),
+                      )
+                    ],
+                  ),
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -212,17 +251,17 @@ class _MyWidgetState extends State<EditCompanyScreen> {
                         companyController.updateCompany();
                       }),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 20),
-                  child: LargeButton(
-                      title: 'Delete',
-                      color: const Color.fromARGB(255, 202, 34, 22),
-                      onPressed: () {
-                        print(companyController.company.id);
-                        delete(context, companyController.company.id);
-                        // companyController.deleteCompany();
-                      }),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.only(top: 10, bottom: 20),
+                //   child: LargeButton(
+                //       title: 'Delete',
+                //       color: const Color.fromARGB(255, 202, 34, 22),
+                //       onPressed: () {
+                //         print(companyController.company.id);
+                //         delete(context, companyController.company.id);
+                //         // companyController.deleteCompany();
+                //       }),
+                // ),
               ],
             ),
           ),
@@ -241,7 +280,7 @@ class _MyWidgetState extends State<EditCompanyScreen> {
         padding: const EdgeInsets.only(bottom: 8),
         child: SvgPicture.asset('assets/images/logout.svg'),
       ),
-      title: "Are you sure you want to this company?",
+      title: "Are you sure you want to delete this company?",
       buttons: [
         DialogButton(
           height: 55,

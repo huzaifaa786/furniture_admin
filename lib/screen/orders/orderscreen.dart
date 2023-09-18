@@ -16,14 +16,11 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  chatCount() {
-    orderController.getItemsStream();
-    setState(() {});
-  }
+  String? search;
 
   @override
   void initState() {
-    chatCount();
+    orderController.getItemsStream(query: '');
     super.initState();
   }
 
@@ -57,6 +54,11 @@ class _OrderScreenState extends State<OrderScreen> {
           Padding(
             padding: EdgeInsets.all(20),
             child: TextField(
+              onChanged: (String val) {
+                search = val;
+                orderController.getItemsStream(query: search);
+                setState(() {});
+              },
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey[300]!),
@@ -74,7 +76,7 @@ class _OrderScreenState extends State<OrderScreen> {
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: StreamBuilder<List<OrderModel>>(
                 stream: orderController
-                    .getItemsStream(), // Use the stream you created to fetch data
+                    .orderStream, // Use the stream you created to fetch data
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -87,16 +89,15 @@ class _OrderScreenState extends State<OrderScreen> {
                       itemBuilder: (context, index) {
                         OrderModel item = items[index];
                         return OrderCard(
-                          id: item.id,
-                          amount: item.amount.toString(),
-                          description: item.description,
-                          date: item.date,
-                          time: item.time,
-                          companyName: item.companyName,
-                          status: item.status,
-                          user: item.userId,
-                          company: item.companyId
-                        );
+                            id: item.id,
+                            amount: item.amount.toString(),
+                            description: item.description,
+                            date: item.date,
+                            time: item.time,
+                            companyName: item.companyName,
+                            status: item.status,
+                            user: item.userId,
+                            company: item.companyId);
                       },
                     );
                   }

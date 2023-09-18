@@ -11,6 +11,8 @@ class SaleController extends GetxController {
   var format1 = 'month';
   DateTime ourdate = DateTime.now();
   DateTime today = DateTime.now();
+  DateTime? rangeStart;
+  DateTime? rangeEnd;
 
   void onFormatChanged(DateTime date) {
     today = date;
@@ -26,6 +28,20 @@ class SaleController extends GetxController {
     update();
   }
 
+  void onRangeSelected(start, end, focusedDay) {
+    rangeStart = start;
+    rangeEnd = end;
+    today = focusedDay;
+    ourdate = focusedDay;
+    if (end == null) {
+      getsale();
+      ;
+    } else {
+      getSalesBySelectedRange(start, end);
+    }
+    update();
+  }
+
   // bool _shouldFetchCompanies = false;
   List<Company> companies = <Company>[].obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -34,7 +50,7 @@ class SaleController extends GetxController {
     try {
       LoadingHelper.show();
       QuerySnapshot querySnapshot =
-          await firestore.collection('companies').get();
+          await firestore.collection('companies').where('delete', isEqualTo: false).get();
 
       List<Company> fetchedCompanies = querySnapshot.docs.map((doc) {
         return Company(
@@ -113,10 +129,38 @@ class SaleController extends GetxController {
     return sum;
   }
 
+  int getSalesBySelectedRange(DateTime startDate, DateTime endDate) {
+    List<OrderModel> fetchSales = orders;
+    // print(fetchSales);
+    sum = 0;
+    DateTime formattedStartDate = DateTime.utc(
+        startDate.year, startDate.month, startDate.day, 0, 0, 0, 0);
+    DateTime formattedEndDate =
+        DateTime.utc(endDate.year, endDate.month, endDate.day, 0, 0, 0, 0);
+    for (var sale in fetchSales) {
+      DateTime saleDate =
+          DateTime.fromMillisecondsSinceEpoch(int.parse(sale.id!));
+      DateTime formattedSaleDate =
+          DateTime.utc(saleDate.year, saleDate.month, saleDate.day, 0, 0, 0, 0);
+      if ((formattedSaleDate.isAfter(formattedStartDate) ||
+              formattedSaleDate.isAtSameMomentAs(formattedStartDate)) &&
+          (formattedSaleDate.isBefore(formattedEndDate) ||
+              formattedSaleDate.isAtSameMomentAs(formattedEndDate))) {
+        sum += sale.amount!;
+      }
+    }
+    update();
+    print(sum);
+    return sum;
+  }
+
   clear() {
     ourdate = DateTime.now();
     today = DateTime.now();
     sum = 0;
+    rangeStart = null;
+    rangeEnd = null;
+    orders = [];
     update();
   }
 }

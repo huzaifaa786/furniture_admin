@@ -60,7 +60,11 @@ class _CompanySalesScreenState extends State<CompanySalesScreen> {
                                 firstDay: DateTime.utc(2023, 1, 1),
                                 lastDay: DateTime.now(),
                                 focusedDay: saleController.today,
-                                onDaySelected: saleController.onDaySelected,
+                               rangeStartDay: saleController.rangeStart,
+                                rangeEndDay: saleController.rangeEnd,
+                                rangeSelectionMode: RangeSelectionMode.enforced,
+                                // onDaySelected: saleController.onDaySelected,
+                                onRangeSelected: saleController.onRangeSelected,
                                 calendarStyle: CalendarStyle(
                                   todayDecoration: BoxDecoration(
                                       color: mainColor.withOpacity(0.5),
@@ -71,6 +75,11 @@ class _CompanySalesScreenState extends State<CompanySalesScreen> {
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
+                                  rangeStartDecoration: BoxDecoration(
+                                      color: mainColor, shape: BoxShape.circle),
+                                  rangeEndDecoration: BoxDecoration(
+                                      color: mainColor, shape: BoxShape.circle),
+                                      rangeHighlightColor: mainColor.withOpacity(0.2),
                                   isTodayHighlighted: true,
                                   outsideDaysVisible: false,
                                 ),

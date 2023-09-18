@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
 
 class BugCard extends StatelessWidget {
   const BugCard(
@@ -10,6 +11,7 @@ class BugCard extends StatelessWidget {
       this.id,
       this.description,
       this.image,
+      this.seen = false,
       this.ontap});
   final description;
   final date;
@@ -17,6 +19,8 @@ class BugCard extends StatelessWidget {
   final amount;
   final image;
   final ontap;
+  final seen;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -45,12 +49,18 @@ class BugCard extends StatelessWidget {
               ),
               Container(
                   padding: EdgeInsets.only(left: 8),
-                  width: MediaQuery.of(context).size.width * 0.6,
+                  width: MediaQuery.of(context).size.width * 0.57,
                   child: Text(
                     description,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                  ))
+                  )),
+              Padding(
+                padding: const EdgeInsets.only(left: 4.0),
+                child: badges.Badge(
+                  showBadge: seen == true ? false : true,
+                ),
+              )
             ],
           ),
         ),

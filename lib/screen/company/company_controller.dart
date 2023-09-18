@@ -49,8 +49,10 @@ class CompanyController extends GetxController {
     if (!_shouldFetchCompanies) return;
     try {
       LoadingHelper.show();
-      QuerySnapshot querySnapshot =
-          await firestore.collection('companies').get();
+      QuerySnapshot querySnapshot = await firestore
+          .collection('companies')
+          .where('delete', isEqualTo: false)
+          .get();
 
       List<Company> fetchedCompanies = querySnapshot.docs.map((doc) {
         return Company(
@@ -183,6 +185,7 @@ class CompanyController extends GetxController {
           'endTime': endTime,
           'englishBio': englishBio.text,
           'arabicBio': arabicBio.text,
+          'delete': false
         });
 
         if (docRef.id.isNotEmpty) {

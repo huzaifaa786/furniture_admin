@@ -40,6 +40,7 @@ class ChatPageState extends State<ChatPage> {
   int _limit = 20;
   int _limitIncrement = 20;
   String groupChatId = "";
+  bool isDeleted = false;
 
   File? imageFile;
   bool isLoading = false;
@@ -123,6 +124,17 @@ class ChatPageState extends State<ChatPage> {
     //   currentUserId,
     //   {FirestoreConstants.chattingWith: peerId},
     // );
+
+    final docRef1 =
+        FirebaseFirestore.instance.collection('companies').doc(currentUserId);
+    docRef1.get().then((docSnapshot) {
+      if (docSnapshot.exists) {
+        isDeleted = docSnapshot.data()!['delete'];
+        setState(() {});
+      }
+    }).catchError((error) {
+      print('Error fetching document: $error');
+    });
   }
 
   Future getImage() async {
@@ -204,7 +216,9 @@ class ChatPageState extends State<ChatPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                     padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                    width: 200,
+                    constraints: BoxConstraints(
+                      maxWidth: 200,
+                    ),
                     decoration: BoxDecoration(
                         color: mainColor,
                         borderRadius: BorderRadius.circular(8)),
@@ -493,7 +507,9 @@ class ChatPageState extends State<ChatPage> {
                             style: TextStyle(color: Colors.black),
                           ),
                           padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                          width: 200,
+                          constraints: BoxConstraints(
+                            maxWidth: 200,
+                          ),
                           decoration: BoxDecoration(
                               color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(8)),
@@ -753,7 +769,12 @@ class ChatPageState extends State<ChatPage> {
                   // List of messages
                   buildListMessage(),
                   // Input content
-                  buildInput(),
+                  isDeleted == false
+                      ? buildInput()
+                      : Text(
+                          "You are not able to send message from this company",
+                          textAlign: TextAlign.center,
+                        ),
                 ],
               ),
 
@@ -924,7 +945,8 @@ class ChatPageState extends State<ChatPage> {
                         dateController.text +
                         '~~TIME-' +
                         timeController.text +
-                        '~~pay:' + 'false';
+                        '~~pay:' +
+                        'false';
                     onSendMessage(bill, TypeMessage.bill);
                     Navigator.pop(context);
                   }

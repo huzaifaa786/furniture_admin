@@ -58,6 +58,7 @@ class _BugsScreenState extends State<BugsScreen> {
                                   id: item.id,
                                   description: item.description,
                                   image: item.image!,
+                                  seen: item.seen,
                                  ontap: () {
                                     Get.to(() => BugDetail(
                                           bug: item,

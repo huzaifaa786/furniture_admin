@@ -93,28 +93,53 @@ class ChatLsitScreen extends StatelessWidget {
                                           ),
                                           title: Row(
                                             children: [
-                                              Text(
-                                                userData['name'],
-                                                style: TextStyle(
-                                                    fontFamily: 'Poppins',
-                                                    fontWeight: FontWeight.w600),
+                                              Container(
+                                                constraints: BoxConstraints(
+                                                    maxWidth:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.38),
+                                                child: Text(
+                                                  userData['name'],
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left:4.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 4.0),
                                                 child: badges.Badge(
-                                                  showBadge: userData['seen'] == true ? false: true,
+                                                  showBadge:
+                                                      userData['seen'] == true
+                                                          ? false
+                                                          : true,
                                                 ),
                                               )
                                             ],
                                           ),
-                                          subtitle: Text(
-                                            'Company Name: ' +
-                                                userData['companyName'],
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 11,
-                                              fontFamily: 'Mazzard',
-                                              fontWeight: FontWeight.w400,
+                                          subtitle: Container(
+                                            constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.38),
+                                            child: Text(
+                                              'Company Name: ' +
+                                                  userData['companyName'],
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 11,
+                                                fontFamily: 'Mazzard',
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
                                           ),
                                           trailing: Icon(
@@ -122,13 +147,17 @@ class ChatLsitScreen extends StatelessWidget {
                                             size: 30,
                                           ),
                                           onTap: () {
-                                            Get.to(() => ChatPage(
+                                            Get.to(
+                                              () => ChatPage(
                                                 arguments: ChatPageArguments(
-                                                    peerId: userData['id'],
-                                                    peerAvatar: 'https://dcblog.b-cdn.net/wp-content/uploads/2021/02/Full-form-of-URL-1.jpg',
-                                                    peerNickname: userData['name'],
-                                                    currentId: userData['companyId'],
-                                                  ),
+                                                  peerId: userData['id'],
+                                                  peerAvatar:
+                                                      'https://dcblog.b-cdn.net/wp-content/uploads/2021/02/Full-form-of-URL-1.jpg',
+                                                  peerNickname:
+                                                      userData['name'],
+                                                  currentId:
+                                                      userData['companyId'],
+                                                ),
                                               ),
                                             );
                                           },

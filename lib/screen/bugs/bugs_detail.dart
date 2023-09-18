@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_admin/models/bug_model.dart';
 import 'package:furniture_admin/screen/chat/full_photo_page.dart';
@@ -14,6 +15,30 @@ class BugDetail extends StatefulWidget {
 }
 
 class _BugDetailState extends State<BugDetail> {
+  @override
+  void initState() {
+    super.initState();
+    updateSeenStatus();
+  }
+
+  Future<void> updateSeenStatus() async {
+       final docRef = FirebaseFirestore.instance
+        .collection('reports')
+        .doc(widget.bug!.id);
+    docRef.get().then((docSnapshot) {
+      if (docSnapshot.exists) {
+        docRef.update({'seen': true}).then((_) {
+          print('Update successful');
+        }).catchError((error) {
+          print('Error updating document: $error');
+        });
+      } else {
+        print('Document does not exist');
+      }
+    }).catchError((error) {
+      print('Error fetching document: $error');
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -150,7 +150,7 @@ class EditCompanyController extends GetxController {
     try {
       LoadingHelper.show();
       print(id);
-      await firestore.collection('companies').doc(id).delete();
+      await firestore.collection('companies').doc(id).update({'delete': true});
       Get.offAll(() => HomeScreen());
       LoadingHelper.dismiss();
     } catch (e) {

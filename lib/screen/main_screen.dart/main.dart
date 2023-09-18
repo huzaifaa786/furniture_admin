@@ -10,13 +10,13 @@ import 'package:furniture_admin/screen/bugs/bugs.dart';
 import 'package:furniture_admin/screen/company/add_company_screen.dart';
 import 'package:furniture_admin/screen/company/company_controller.dart';
 import 'package:furniture_admin/screen/company/company_list.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:furniture_admin/screen/main_screen.dart/main_controller.dart';
 import 'package:furniture_admin/screen/sales/sales_screen.dart';
 import 'package:furniture_admin/static/main_card.dart';
 import 'package:furniture_admin/values/colors.dart';
 import 'package:get/get.dart';
-
+import 'package:badges/badges.dart' as badges;
 import '../orders/orderscreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,14 +33,15 @@ class _HomeScreenState extends State<HomeScreen> {
     'https://cdn.shopify.com/s/files/1/0891/4784/articles/Top_12_Furniture_Store_in_Calgary_1024x1024.jpg?v=1663218020',
     'https://cdn.shopify.com/s/files/1/0891/4784/articles/Top_12_Furniture_Store_in_Calgary_1024x1024.jpg?v=1663218020',
   ];
-  chatCount() {
+  countFunction() {
     mainController.count();
+    mainController.reportCount();
     setState(() {});
   }
 
   @override
   void initState() {
-    chatCount();
+    countFunction();
     super.initState();
   }
 
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.all(2.0),
                           child: InkWell(
                             onTap: () {
-                              loginController.signOut();
+                              logout(context);
                             },
                             child: CircleAvatar(
                               radius: 25.0,
@@ -92,14 +93,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: white,
                             borderRadius: BorderRadius.circular(45)),
                         padding: EdgeInsets.all(2),
-                        child: IconButton(
-                          onPressed: () {
-                            Get.to(() => BugsScreen())!.then((value) {
-                              mainController.count();
-                            });
-                          },
-                          icon: SvgPicture.asset(
-                            'assets/images/bug.svg',
+                        child: badges.Badge(
+                          position: badges.BadgePosition.topEnd(top: -4,end: -4),
+                          showBadge:  mainController.reportlength.toString() == '0'? false: true,
+                          badgeContent: Text( mainController.reportlength.toString(),style: TextStyle(color: white),),
+                          child: IconButton(
+                            onPressed: () {
+                              Get.to(() => BugsScreen())!.then((value) {
+                                mainController.count();
+                                mainController.reportCount();
+                              });
+                            },
+                            icon: SvgPicture.asset(
+                              'assets/images/bug.svg',
+                            ),
                           ),
                         ),
                       ),
@@ -182,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                               Get.to(() => AddCompanyScreen())!.then((value) {
                                 mainController.count();
+                                mainController.reportCount();
                               });
                             },
                           ),
@@ -198,6 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ontap: () {
                               Get.to(() => ComapanyList())!.then((value) {
                                 mainController.count();
+                                mainController.reportCount();
                               });
                             },
                           ),
@@ -207,6 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ontap: () {
                               Get.to(() => OrderScreen())!.then((value) {
                                 mainController.count();
+                                mainController.reportCount();
                               });
                             },
                           ),
@@ -217,6 +227,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ontap: () {
                               Get.to(() => ChatLsitScreen())!.then((value) {
                                 mainController.count();
+                                mainController.reportCount();
+
                               });
                             },
                           ),
@@ -303,5 +315,56 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     )));
+  }
+
+  logout(context) {
+    Alert(
+      style: const AlertStyle(
+        titleStyle: TextStyle(fontSize: 21, fontWeight: FontWeight.w400),
+      ),
+      context: context,
+      image: Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: SvgPicture.asset('assets/images/logout.svg'),
+      ),
+      title: "Are you sure that you want to logout?",
+      buttons: [
+        DialogButton(
+          height: 55,
+          radius: BorderRadius.circular(13),
+          child: Text(
+            "Yes",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600),
+          ),
+          onPressed: () {
+            loginController.signOut();
+          },
+          color: mainColor,
+        ),
+        DialogButton(
+          height: 55,
+          radius: BorderRadius.circular(13),
+          border: Border.all(
+            color: Colors.black54,
+          ),
+          child: Text(
+            "No",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600),
+          ),
+          onPressed: () {
+            Get.back();
+          },
+          color: Colors.black,
+        ),
+      ],
+    ).show();
   }
 }

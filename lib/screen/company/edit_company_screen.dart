@@ -30,242 +30,242 @@ class _MyWidgetState extends State<EditCompanyScreen> {
     return GetBuilder<EditCompanyController>(
       builder: (companyController) => Scaffold(
         body: SafeArea(
-            child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(top: 10, right: 20, left: 20),
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 12, bottom: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(45),
-                              border: Border.all(color: Colors.grey)),
-                          child: Icon(
-                            Icons.arrow_back_ios_new,
-                            size: 18,
+            child: Container(
+              padding: EdgeInsets.only(top: 10, right: 20, left: 20),
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, bottom: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(45),
+                                  border: Border.all(color: Colors.grey)),
+                              child: Icon(
+                                Icons.arrow_back_ios_new,
+                                size: 18,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Text(
-                        'Edit Company',
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 21,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          print(companyController.company.id);
-                          delete(context, companyController.company.id);
-                        },
-                        child: Container(
-                            padding: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(45)),
-                            child: Icon(
-                              Icons.delete_forever_outlined,
-                              color: white,
-                            )),
-                      )
-                    ],
-                  ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      EditCompanyPhotoPicker(
-                          comapnyImage: companyController.companyImage1,
-                          pickImage: companyController.pickImage1,
-                          originalImage:
-                              companyController.company.companyImage1),
-                      EditCompanyPhotoPicker(
-                          comapnyImage: companyController.companyImage2,
-                          pickImage: companyController.pickImage2,
-                          originalImage:
-                              companyController.company.companyImage2),
-                      EditCompanyPhotoPicker(
-                          comapnyImage: companyController.companyImage3,
-                          pickImage: companyController.pickImage3,
-                          originalImage:
-                              companyController.company.companyImage3),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 20, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Company name',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-                InputField(
-                  validate: companyController.validateCompanyUpForm,
-                  validator: (field) =>
-                      Validators.emptyStringValidator(field, '*Comapany name'),
-                  controller: companyController.name,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 20, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Bio in english',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-                BioInputField(
-                  validate: companyController.validateCompanyUpForm,
-                  validator: (field) =>
-                      Validators.emptyStringValidator(field, '*Bio in English'),
-                  controller: companyController.englishBio,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Bio in arabic',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-                BioInputField(
-                  validate: companyController.validateCompanyUpForm,
-                  validator: (field) =>
-                      Validators.emptyStringValidator(field, '*Bio in arabic'),
-                  controller: companyController.arabicBio,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Working Hours',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    companyController.selectTimeRange();
-                  },
-                  child: Container(
-                    height: 50,
-                    // width: 300,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Container(
-                                height: 25,
-                                width: 25,
+                          Text(
+                            'Edit Company',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 21,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              print(companyController.company.id);
+                              delete(context, companyController.company.id);
+                            },
+                            child: Container(
+                                padding: EdgeInsets.all(4),
                                 decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: mainColor,
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                child: Image.asset('assets/images/clock.png'),
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(45)),
+                                child: Icon(
+                                  Icons.delete_forever_outlined,
+                                  color: white,
+                                )),
+                          )
+                        ],
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          EditCompanyPhotoPicker(
+                              comapnyImage: companyController.companyImage1,
+                              pickImage: companyController.pickImage1,
+                              originalImage:
+                                  companyController.company.companyImage1),
+                          EditCompanyPhotoPicker(
+                              comapnyImage: companyController.companyImage2,
+                              pickImage: companyController.pickImage2,
+                              originalImage:
+                                  companyController.company.companyImage2),
+                          EditCompanyPhotoPicker(
+                              comapnyImage: companyController.companyImage3,
+                              pickImage: companyController.pickImage3,
+                              originalImage:
+                                  companyController.company.companyImage3),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 20, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Company name',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    InputField(
+                      validate: companyController.validateCompanyUpForm,
+                      validator: (field) =>
+                          Validators.emptyStringValidator(field, '*Comapany name'),
+                      controller: companyController.name,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 20, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Bio in english',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    BioInputField(
+                      validate: companyController.validateCompanyUpForm,
+                      validator: (field) =>
+                          Validators.emptyStringValidator(field, '*Bio in English'),
+                      controller: companyController.englishBio,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Bio in arabic',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    BioInputField(
+                      validate: companyController.validateCompanyUpForm,
+                      validator: (field) =>
+                          Validators.emptyStringValidator(field, '*Bio in arabic'),
+                      controller: companyController.arabicBio,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Working Hours',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        companyController.selectTimeRange();
+                      },
+                      child: Container(
+                        height: 50,
+                        // width: 300,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey.shade300,
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Container(
+                                    height: 25,
+                                    width: 25,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: mainColor,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(20))),
+                                    child: Image.asset('assets/images/clock.png'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'From',
+                                    style: TextStyle(
+                                        fontSize: 14, fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(formattedTime(companyController.startTime)),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 40.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'To',
+                                    style: TextStyle(
+                                        fontSize: 14, fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(formattedTime(companyController.endTime)),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                'From',
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(formattedTime(companyController.startTime)),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 40.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                'To',
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(formattedTime(companyController.endTime)),
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 20, bottom: 10),
+                      child: LargeButton(
+                          title: 'Update',
+                          onPressed: () {
+                            companyController.updateCompany();
+                          }),
+                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(top: 10, bottom: 20),
+                    //   child: LargeButton(
+                    //       title: 'Delete',
+                    //       color: const Color.fromARGB(255, 202, 34, 22),
+                    //       onPressed: () {
+                    //         print(companyController.company.id);
+                    //         delete(context, companyController.company.id);
+                    //         // companyController.deleteCompany();
+                    //       }),
+                    // ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 20, bottom: 10),
-                  child: LargeButton(
-                      title: 'Update',
-                      onPressed: () {
-                        companyController.updateCompany();
-                      }),
-                ),
-                // Padding(
-                //   padding: EdgeInsets.only(top: 10, bottom: 20),
-                //   child: LargeButton(
-                //       title: 'Delete',
-                //       color: const Color.fromARGB(255, 202, 34, 22),
-                //       onPressed: () {
-                //         print(companyController.company.id);
-                //         delete(context, companyController.company.id);
-                //         // companyController.deleteCompany();
-                //       }),
-                // ),
-              ],
-            ),
-          ),
-        )),
+              ),
+            )),
       ),
     );
   }

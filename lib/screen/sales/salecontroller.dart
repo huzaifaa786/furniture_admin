@@ -83,7 +83,7 @@ class SaleController extends GetxController {
       QuerySnapshot querySnapshot = await firestore
           .collection('orders')
           .where('companyId', isEqualTo: id)
-          .where('status', isEqualTo: 3)
+          // .where('status', isEqualTo: 3)
           .get();
 
       List<OrderModel> fetchSale = querySnapshot.docs.map((doc) {

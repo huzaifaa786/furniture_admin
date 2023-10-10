@@ -137,7 +137,8 @@ class OrderController extends GetxController {
             : status == 2
                 ? noti2
                 : noti3,
-        'orderId': orderId
+        'orderId': orderId,
+        'seen': false
       });
       LoadingHelper.dismiss();
       return true;

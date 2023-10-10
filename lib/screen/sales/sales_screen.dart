@@ -59,8 +59,8 @@ class _SalesScreenState extends State<SalesScreen> {
                             ),
                             shadows: [
                               BoxShadow(
-                                color: Colors.grey[200]!,
-                                blurRadius: 28,
+                                color: Colors.grey[300]!,
+                                blurRadius: 8,
                                 offset: Offset(2, 2),
                                 spreadRadius: 0,
                               )

@@ -60,8 +60,8 @@ class _ComapanyListState extends State<ComapanyList> {
                             ),
                             shadows: [
                               BoxShadow(
-                                color: Color(0x21000000),
-                                blurRadius: 28,
+                                color: Colors.grey[300]!,
+                                blurRadius: 8,
                                 offset: Offset(2, 2),
                                 spreadRadius: 0,
                               )

@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: 'All Chats',
                             badgeValue: mainController.chatlength.toString(),
                             ontap: () {
-                              Get.to(() => ChatLsitScreen())!.then((value) {
+                              Get.to(() => ChatListScreen())!.then((value) {
                                 mainController.count();
                                 mainController.reportCount();
 

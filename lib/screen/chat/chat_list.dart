@@ -53,12 +53,25 @@ class ChatListScreen extends StatelessWidget {
                         } else if (snapshot.hasError) {
                           return Center(
                               child: Text('Error: ${snapshot.error}'));
+                        } else if (snapshot.hasData &&
+                            snapshot.data!.isNotEmpty) {
+                          final userWithData = snapshot.data!.first;
+                          return CustomChatListItem(userData: userWithData);
                         } else {
-                          final userWithData = snapshot.data?.first;
-                          return userWithData != null
-                              ? CustomChatListItem(userData: userWithData)
-                              : SizedBox(); // Return an empty SizedBox if no user data is found.
+                          return SizedBox(); // Return an empty SizedBox if no user data is found.
                         }
+                        // if (snapshot.connectionState ==
+                        //     ConnectionState.waiting) {
+                        //   return Center(child: shimmerLoadingWidget());
+                        // } else if (snapshot.hasError) {
+                        //   return Center(
+                        //       child: Text('Error: ${snapshot.error}'));
+                        // } else {
+                        //   final userWithData = snapshot.data?.first;
+                        //   return userWithData != null
+                        //       ? CustomChatListItem(userData: userWithData)
+                        //       : SizedBox(); // Return an empty SizedBox if no user data is found.
+                        // }
                       },
                     );
                   },

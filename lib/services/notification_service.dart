@@ -68,19 +68,19 @@ class NotificationService extends GetxController {
   void showFlutterNotification(RemoteMessage message) {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
+    // AppleNotification? ios = message.notification?.apple;
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails('your channel id', 'your channel name',
             importance: Importance.max,
             priority: Priority.high,
             showWhen: false);
-    // const IOSNotificationDetails iOSPlatformChannelSpecifics =
-    //     IOSNotificationDetails(
-    //         presentAlert: true, presentBadge: true, presentSound: true);
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics =
+        DarwinNotificationDetails();
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
-      // iOS: iOSPlatformChannelSpecifics
+      iOS: iOSPlatformChannelSpecifics,
     );
-    if (notification != null && android != null && !kIsWeb) {
+    if (notification != null && !kIsWeb) {
       flutterLocalNotificationsPlugin.show(
           0, notification.title, notification.body, platformChannelSpecifics,
           payload: message.data.toString());

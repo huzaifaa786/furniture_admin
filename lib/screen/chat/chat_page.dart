@@ -56,9 +56,32 @@ class ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
+    fetchuserToken();
     focusNode.addListener(onFocusChange);
     listScrollController.addListener(_scrollListener);
     readLocal();
+  }
+
+  String userToken = '';
+  void fetchuserToken() async {
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.arguments.peerId)
+          .get();
+
+      if (snapshot.exists) {
+        setState(() {
+          userToken = snapshot['token'];
+          print('userToken*******************');
+          print(userToken);
+        });
+      } else {
+        print('User not found');
+      }
+    } catch (error) {
+      print('Error fetching user token: $error');
+    }
   }
 
   _scrollListener() {
@@ -189,6 +212,10 @@ class ChatPageState extends State<ChatPage> {
 
   void onSendMessage(String content, int type) {
     if (content.trim().isNotEmpty) {
+      notificationService.postNotification(
+          title: 'Messages',
+          body: 'New Message Received',
+          receiverToken: userToken);
       textEditingController.clear();
       chatProvider.sendMessage(
           content, type, groupChatId, currentUserId, widget.arguments.peerId);
@@ -225,8 +252,7 @@ class ChatPageState extends State<ChatPage> {
                         decoration: BoxDecoration(
                             color: mainColor,
                             borderRadius: BorderRadius.circular(8)),
-                        margin: EdgeInsets.only(
-                            bottom: 10, right: 10),
+                        margin: EdgeInsets.only(bottom: 10, right: 10),
                       )
                     : messageChat.type == TypeMessage.image
                         // Image
@@ -251,14 +277,14 @@ class ChatPageState extends State<ChatPage> {
                                       child: Center(
                                         child: CircularProgressIndicator(
                                           color: mainColor,
-                                          value:
-                                              loadingProgress.expectedTotalBytes !=
-                                                      null
-                                                  ? loadingProgress
-                                                          .cumulativeBytesLoaded /
-                                                      loadingProgress
-                                                          .expectedTotalBytes!
-                                                  : null,
+                                          value: loadingProgress
+                                                      .expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
                                         ),
                                       ),
                                     );
@@ -281,7 +307,8 @@ class ChatPageState extends State<ChatPage> {
                                   height: 200,
                                   fit: BoxFit.cover,
                                 ),
-                                borderRadius: BorderRadius.all(Radius.circular(8)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
                                 clipBehavior: Clip.hardEdge,
                               ),
                               onPressed: () {
@@ -295,12 +322,11 @@ class ChatPageState extends State<ChatPage> {
                                 );
                               },
                               style: ButtonStyle(
-                                  padding: MaterialStateProperty.all<EdgeInsets>(
-                                      EdgeInsets.all(0))),
+                                  padding:
+                                      MaterialStateProperty.all<EdgeInsets>(
+                                          EdgeInsets.all(0))),
                             ),
-                            margin: EdgeInsets.only(
-                                bottom: 10,
-                                right: 10),
+                            margin: EdgeInsets.only(bottom: 10, right: 10),
                           )
                         // Location
                         : messageChat.type == TypeMessage.location
@@ -324,9 +350,7 @@ class ChatPageState extends State<ChatPage> {
                                 decoration: BoxDecoration(
                                     color: mainColor,
                                     borderRadius: BorderRadius.circular(8)),
-                                margin: EdgeInsets.only(
-                                    bottom: 10,
-                                    right: 10),
+                                margin: EdgeInsets.only(bottom: 10, right: 10),
                               )
                             // Bill
 
@@ -336,7 +360,8 @@ class ChatPageState extends State<ChatPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 8.0),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 8.0),
                                       child: Text(
                                         'Description:',
                                         style: TextStyle(
@@ -389,7 +414,8 @@ class ChatPageState extends State<ChatPage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 6.0),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 6.0),
                                       child: Row(
                                         children: [
                                           Text(
@@ -449,27 +475,25 @@ class ChatPageState extends State<ChatPage> {
                                 decoration: BoxDecoration(
                                     color: mainColor,
                                     borderRadius: BorderRadius.circular(8)),
-                                margin: EdgeInsets.only(
-                                    bottom: 10,
-                                    right: 10),
+                                margin: EdgeInsets.only(bottom: 10, right: 10),
                               ),
               ],
               mainAxisAlignment: MainAxisAlignment.end,
             ),
             isLastMessageRight(index)
-                  ? Container(
-                      child: Text(
-                        DateFormat('dd MMM kk:mm').format(
-                            DateTime.fromMillisecondsSinceEpoch(
-                                int.parse(messageChat.timestamp))),
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                            fontStyle: FontStyle.italic),
-                      ),
-                      margin: EdgeInsets.only(right: 20, bottom: 10),
-                    )
-                  : SizedBox.shrink()
+                ? Container(
+                    child: Text(
+                      DateFormat('dd MMM kk:mm').format(
+                          DateTime.fromMillisecondsSinceEpoch(
+                              int.parse(messageChat.timestamp))),
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                          fontStyle: FontStyle.italic),
+                    ),
+                    margin: EdgeInsets.only(right: 20, bottom: 10),
+                  )
+                : SizedBox.shrink()
           ],
         );
       } else {

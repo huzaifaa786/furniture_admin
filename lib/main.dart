@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:furniture_admin/screen/chat/controller.dart';
 import 'package:furniture_admin/helper/loading.dart';
@@ -45,7 +46,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark, 
+      child : MultiProvider(
       providers: [
         Provider<ChatProvider>(
           create: (_) => ChatProvider(
@@ -66,6 +69,7 @@ class _MyAppState extends State<MyApp> {
           'companysale': (_) => const SalesScreen(),
         },
       ),
+    )
     );
   }
 }

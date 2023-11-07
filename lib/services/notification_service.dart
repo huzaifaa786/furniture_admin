@@ -18,8 +18,10 @@ class NotificationService extends GetxController {
   @override
   void onInit() {
     WidgetsFlutterBinding.ensureInitialized();
+
     registerNotification();
     checkForInitialMessage();
+
     super.onInit();
   }
 
@@ -40,21 +42,13 @@ class NotificationService extends GetxController {
       const AndroidInitializationSettings initializationSettingsAndroid =
           AndroidInitializationSettings('@drawable/ic_stat_download');
 
-      // final IOSInitializationSettings initializationSettingsIOS =
-      //     IOSInitializationSettings(
-      //         requestAlertPermission: true,
-      //         requestBadgePermission: true,
-      //         requestSoundPermission: true,
-      //         onDidReceiveLocalNotification: onDidReceiveLocalNotification);
-
-      // final MacOSInitializationSettings initializationSettingsMacOS =
-      //     const MacOSInitializationSettings();
+      final DarwinInitializationSettings initializationSettingsIOS =
+          DarwinInitializationSettings();
 
       final InitializationSettings initializationSettings =
           InitializationSettings(
         android: initializationSettingsAndroid,
-        // iOS: initializationSettingsIOS,
-        // macOS: initializationSettingsMacOS
+        iOS: initializationSettingsIOS,
       );
 
       await flutterLocalNotificationsPlugin.initialize(initializationSettings);
@@ -66,9 +60,9 @@ class NotificationService extends GetxController {
   }
 
   void showFlutterNotification(RemoteMessage message) {
+    print('hehehe');
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
-    // AppleNotification? ios = message.notification?.apple;
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails('your channel id', 'your channel name',
             importance: Importance.max,
@@ -77,9 +71,8 @@ class NotificationService extends GetxController {
     const DarwinNotificationDetails iOSPlatformChannelSpecifics =
         DarwinNotificationDetails();
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-      iOS: iOSPlatformChannelSpecifics,
-    );
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
     if (notification != null && !kIsWeb) {
       flutterLocalNotificationsPlugin.show(
           0, notification.title, notification.body, platformChannelSpecifics,
